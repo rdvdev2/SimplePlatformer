@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include <utility>
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+std::pair<sf::VideoMode, sf::Uint32> chooseWindowSettings();
+
+int main() {
+    auto videoMode = chooseWindowSettings();
+    sf::RenderWindow window(videoMode.first, "Simple Platformer", videoMode.second);
 
     while (window.isOpen())
     {
@@ -16,9 +17,18 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+
+        // Draw here
+
         window.display();
     }
 
     return 0;
+}
+
+std::pair<sf::VideoMode, sf::Uint32> chooseWindowSettings() {
+    auto fullscreenModes = sf::VideoMode::getFullscreenModes();
+
+    if (fullscreenModes.empty()) return std::pair(sf::VideoMode::getDesktopMode(), sf::Style::None);
+    else return std::pair(fullscreenModes[0], sf::Style::Fullscreen);
 }
