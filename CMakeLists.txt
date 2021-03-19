@@ -20,6 +20,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(mINI)
 add_library(mINI INTERFACE)
 target_include_directories(mINI INTERFACE ${mini_SOURCE_DIR}/src)
+target_compile_definitions(mINI INTERFACE MINI_CASE_SENSITIVE)
 add_library(pulzed::mINI ALIAS mINI)
 
 add_subdirectory(src)

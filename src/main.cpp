@@ -1,7 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <utility>
 
+#include "userdata/UserdataManager.h"
+
 std::pair<sf::VideoMode, sf::Uint32> chooseWindowSettings();
+
+SP::Userdata::UserdataManager userdata;
 
 int main() {
     auto videoMode = chooseWindowSettings();
@@ -23,10 +27,18 @@ int main() {
         window.display();
     }
 
+    // Keep window size on next session
+    if (!userdata.settings->IsFullscreen()) {
+        userdata.settings->SetWindowWidth(window.getSize().x);
+        userdata.settings->SetWindowHeight(window.getSize().y);
+    }
+
     return 0;
 }
 
 std::pair<sf::VideoMode, sf::Uint32> chooseWindowSettings() {
+    if (!userdata.settings->IsFullscreen()) return std::pair(sf::VideoMode(userdata.settings->GetWindowWidth(), userdata.settings->GetWindowHeight()), sf::Style::Default);
+
     auto fullscreenModes = sf::VideoMode::getFullscreenModes();
 
     if (fullscreenModes.empty()) return std::pair(sf::VideoMode::getDesktopMode(), sf::Style::None);
