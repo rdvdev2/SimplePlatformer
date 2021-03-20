@@ -10,3 +10,26 @@ target_link_libraries(SimplePlatformer PRIVATE pulzed::mINI) # Include mINI head
 
 # Installation steps
 install(TARGETS SimplePlatformer RUNTIME)
+
+# Copy all the resources
+file(GLOB_RECURSE RESOURCE_FILES
+        RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/resources ${CMAKE_CURRENT_SOURCE_DIR}/resources/*)
+add_custom_target(copy_resource_files ALL
+        COMMENT "Copying resource files")
+
+foreach(RESOURCE_FILE ${RESOURCE_FILES})
+    set(SRC "${CMAKE_CURRENT_SOURCE_DIR}/resources/${RESOURCE_FILE}")
+    set(DST "${CMAKE_CURRENT_BINARY_DIR}/resources/${RESOURCE_FILE}")
+
+    add_custom_command(
+            TARGET copy_resource_files
+            COMMAND ${CMAKE_COMMAND} -E copy ${SRC} ${DST}
+            COMMENT "Copying resource file: ${RESOURCE_FILE}"
+            DEPENDS ${SRC})
+endforeach()
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/resources/*
+        TYPE DATA)
+
+# Delete resource folder on build tree on configure (deals with removed resources)
+file(REMOVE_RECURSE ${CMAKE_CURRENT_BINARY_DIR}/resources)

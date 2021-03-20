@@ -2,14 +2,17 @@
 #include <utility>
 
 #include "userdata/UserdataManager.h"
+#include "scenes/MainMenu.h"
 
 std::pair<sf::VideoMode, sf::Uint32> chooseWindowSettings();
 
 SP::Userdata::UserdataManager userdata;
+SP::Scene::Scene* currentScene;
 
 int main() {
     auto videoMode = chooseWindowSettings();
     sf::RenderWindow window(videoMode.first, "Simple Platformer", videoMode.second);
+    currentScene = new SP::Scene::MainMenu();
 
     while (window.isOpen())
     {
@@ -18,16 +21,22 @@ int main() {
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::Resized) {
+                sf::FloatRect newArea(0, 0, event.size.width, event.size.height);
+                window.setView(sf::View(newArea));
+            }
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 window.close();
         }
 
         window.clear();
 
-        // Draw here
+        currentScene->render(&window, 0);
 
         window.display();
     }
+
+    delete currentScene;
 
     // Keep window size on next session
     if (!userdata.settings->IsFullscreen()) {
