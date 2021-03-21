@@ -16,11 +16,13 @@ namespace SP::Scene::Resource {
             FontMoonhouse.Load();
 
             TextureMainMenuBackground.Load();
+            TextureMainMenuPlayButton.Load();
         }
 
         FONT(Moonhouse, moonhouse);
 
         TEXTURE(MainMenuBackground, main_menu/background);
+        TEXTURE(MainMenuPlayButton, main_menu/play_button);
     };
 }
 

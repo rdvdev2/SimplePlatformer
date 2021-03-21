@@ -2,14 +2,17 @@
 
 sf::Font moonhouseFont;
 sf::Texture backgroundTexture;
+sf::Texture playButtonTexture;
 
 sf::Sprite backgroundSprite;
+sf::Sprite playButtonSprite;
 sf::Text titleText;
 sf::Text authorsText;
 
 SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager resourceManager) {
     moonhouseFont = resourceManager.FontMoonhouse;
     backgroundTexture = resourceManager.TextureMainMenuBackground;
+    playButtonTexture = resourceManager.TextureMainMenuPlayButton;
 
     backgroundSprite.setTexture(backgroundTexture);
     backgroundSprite.setColor(sf::Color(255, 0, 0));
@@ -23,6 +26,8 @@ SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager resourceManag
     authorsText.setString("by Victor & Roger");
     authorsText.setFillColor(sf::Color(255, 255, 255));
     authorsText.setStyle(sf::Text::Italic);
+
+    playButtonSprite.setTexture(playButtonTexture);
 }
 
 void SP::Scene::MainMenu::Update(float deltaUTime) {
@@ -48,4 +53,11 @@ void SP::Scene::MainMenu::Render(sf::RenderWindow *window, float deltaRTime) {
     authorsText.setOrigin(textOutline.left + textOutline.width / 2, textOutline.top + textOutline.height / 2);
     authorsText.setPosition(windowSize.x / 2, windowSize.y / 5 * 2);
     window->draw(authorsText);
+
+    imageOutline = playButtonSprite.getLocalBounds();
+    imageScale = std::max((windowSize.x / imageOutline.width) / 10, (windowSize.y / imageOutline.height) / 10);
+    playButtonSprite.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
+    playButtonSprite.setScale(imageScale, imageScale);
+    playButtonSprite.setPosition(windowSize.x / 2, windowSize.y / 5 * 4);
+    window->draw(playButtonSprite);
 }
