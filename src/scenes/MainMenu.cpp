@@ -55,7 +55,7 @@ void SP::Scene::MainMenu::Render(sf::RenderWindow *window, float deltaRTime) {
     window->draw(authorsText);
 
     imageOutline = playButtonSprite.getLocalBounds();
-    imageScale = std::max((windowSize.x / imageOutline.width) / 10, (windowSize.y / imageOutline.height) / 10);
+    imageScale = (windowSize.y / imageOutline.height) / 5;
     playButtonSprite.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
     playButtonSprite.setScale(imageScale, imageScale);
     playButtonSprite.setPosition(windowSize.x / 2, windowSize.y / 5 * 4);
