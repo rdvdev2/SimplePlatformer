@@ -2,15 +2,16 @@
 #define SIMPLEPLATFORMER_MAINMENU_H
 
 #include "Scene.h"
+#include "resources/ResourceManager.h"
 
 namespace SP::Scene {
 
     class MainMenu: public Scene {
     public:
-        MainMenu();
+        MainMenu(SP::Scene::Resource::ResourceManager resourceManager);
 
-        void update(float deltaUTime) override;
-        void render(sf::RenderWindow *window, float deltaRTime) override;
+        void Update(float deltaUTime) override;
+        void Render(sf::RenderWindow *window, float deltaRTime) override;
     };
 }
 

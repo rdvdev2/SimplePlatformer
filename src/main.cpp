@@ -3,16 +3,18 @@
 
 #include "userdata/UserdataManager.h"
 #include "scenes/MainMenu.h"
+#include "scenes/resources/ResourceManager.h"
 
 std::pair<sf::VideoMode, sf::Uint32> chooseWindowSettings();
 
 SP::Userdata::UserdataManager userdata;
+SP::Scene::Resource::ResourceManager resourceManager;
 SP::Scene::Scene* currentScene;
 
 int main() {
     auto videoMode = chooseWindowSettings();
     sf::RenderWindow window(videoMode.first, "Simple Platformer", videoMode.second);
-    currentScene = new SP::Scene::MainMenu();
+    currentScene = new SP::Scene::MainMenu(resourceManager);
 
     while (window.isOpen())
     {
@@ -31,7 +33,7 @@ int main() {
 
         window.clear();
 
-        currentScene->render(&window, 0);
+        currentScene->Render(&window, 0);
 
         window.display();
     }

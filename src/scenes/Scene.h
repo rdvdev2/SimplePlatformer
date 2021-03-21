@@ -7,8 +7,8 @@ namespace SP::Scene {
 
     class Scene {
     public:
-        virtual void update(float deltaUTime) = 0;
-        virtual void render(sf::RenderWindow *window, float deltaRTime) = 0;
+        virtual void Update(float deltaUTime) = 0;
+        virtual void Render(sf::RenderWindow *window, float deltaRTime) = 0;
     };
 }
 

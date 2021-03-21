@@ -7,14 +7,9 @@ sf::Sprite backgroundSprite;
 sf::Text titleText;
 sf::Text authorsText;
 
-SP::Scene::MainMenu::MainMenu() {
-    if (!moonhouseFont.loadFromFile("resources/fonts/moonhouse.ttf")) {
-        throw std::runtime_error("Couldn't load moonhouse font!");
-    }
-
-    if (!backgroundTexture.loadFromFile("resources/images/main_menu/background.png")) {
-        throw std::runtime_error("Couldn't load main menu background image!");
-    }
+SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager resourceManager) {
+    moonhouseFont = resourceManager.FontMoonhouse;
+    backgroundTexture = resourceManager.TextureMainMenuBackground;
 
     backgroundSprite.setTexture(backgroundTexture);
     backgroundSprite.setColor(sf::Color(255, 0, 0));
@@ -30,11 +25,11 @@ SP::Scene::MainMenu::MainMenu() {
     authorsText.setStyle(sf::Text::Italic);
 }
 
-void SP::Scene::MainMenu::update(float deltaUTime) {
+void SP::Scene::MainMenu::Update(float deltaUTime) {
 
 }
 
-void SP::Scene::MainMenu::render(sf::RenderWindow *window, float deltaRTime) {
+void SP::Scene::MainMenu::Render(sf::RenderWindow *window, float deltaRTime) {
     auto windowSize = window->getSize();
 
     auto imageOutline = backgroundSprite.getLocalBounds();
