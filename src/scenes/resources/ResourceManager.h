@@ -3,7 +3,7 @@
 
 #include "Font.h"
 #include "Texture.h"
-#include "../../platform.h"
+#include <platform.h>
 
 #define FONT(name, file) Font Font##name = Font(SP::Platform::GetResourcePath("fonts/"#file".ttf"))
 #define TEXTURE(name, file) Texture Texture##name = Texture(SP::Platform::GetResourcePath("textures/"#file".png"))

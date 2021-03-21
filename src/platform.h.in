@@ -3,6 +3,8 @@
 
 #include <string>
 
+#define SP_RESOURCES_PATH @RESOURCES_PATH@
+
 namespace SP::Platform {
 
     std::string GetUserdataPath();

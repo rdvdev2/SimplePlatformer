@@ -4,7 +4,7 @@
 #include <string>
 
 #include "SettingsManager.h"
-#include "../platform.h"
+#include <platform.h>
 
 namespace SP::Userdata {
 

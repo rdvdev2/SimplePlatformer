@@ -8,6 +8,8 @@ if(WIN32)
     set(SFML_STATIC_LIBRARIES TRUE)
 endif()
 
+include(GNUInstallDirs)
+
 find_package(SFML 2.5 COMPONENTS audio graphics window system REQUIRED)
 
 # Get the mINI library
