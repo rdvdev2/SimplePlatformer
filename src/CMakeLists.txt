@@ -4,9 +4,9 @@ file(GLOB_RECURSE SOURCE_FILES *.c *.cpp *.h *.hpp)
 
 # Configure the platform header
 if(RUN_ON_BUILD_TREE)
-    set(RESOURCES_PATH ${CMAKE_CURRENT_BINARY_DIR}/resources)
+    set(RESOURCES_PATH \"${CMAKE_CURRENT_BINARY_DIR}/resources\")
 else()
-    set(RESOURCES_PATH ${CMAKE_INSTALL_FULL_DATAROOTDIR}/resources)
+    set(RESOURCES_PATH \"${CMAKE_INSTALL_FULL_DATAROOTDIR}/resources\")
 endif()
 configure_file(platform.h.in platform.h @ONLY)
 

@@ -15,5 +15,5 @@ std::string SP::Platform::GetUserdataPath() {
 }
 
 std::string SP::Platform::GetResourcePath(std::string filename) {
-    return "resources/" + filename;
+    return SP_RESOURCES_PATH "/" + filename;
 }
