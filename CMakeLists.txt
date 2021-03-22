@@ -26,3 +26,11 @@ target_compile_definitions(mINI INTERFACE MINI_CASE_SENSITIVE)
 add_library(pulzed::mINI ALIAS mINI)
 
 add_subdirectory(src)
+
+message(CHECK_START "Checking CXX compiler compatibility")
+if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 9.0)
+    message(CHECK_FAIL "Found ${CMAKE_CXX_COMPILER_ID} @ ${CMAKE_CXX_COMPILER_VERSION}")
+    message(SEND_ERROR "This build is known to fail under this compiler (GCC < 9.0)")
+else()
+    message(CHECK_PASS "Found ${CMAKE_CXX_COMPILER_ID} @ ${CMAKE_CXX_COMPILER_VERSION}")
+endif ()
