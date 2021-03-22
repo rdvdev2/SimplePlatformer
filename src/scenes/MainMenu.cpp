@@ -1,5 +1,7 @@
 #include "MainMenu.h"
 
+SP::Input::Menu::Button* playButton;
+
 sf::Font moonhouseFont;
 sf::Texture backgroundTexture;
 sf::Texture playButtonTexture;
@@ -9,7 +11,12 @@ sf::Sprite playButtonSprite;
 sf::Text titleText;
 sf::Text authorsText;
 
-SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager resourceManager) {
+void playButtonCallback();
+
+SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager resourceManager, sf::Window& window) : inputManager(window) {
+    playButton = new SP::Input::Menu::Button(sf::IntRect(), playButtonCallback);
+    inputManager.AddButton(playButton);
+
     moonhouseFont = resourceManager.FontMoonhouse;
     backgroundTexture = resourceManager.TextureMainMenuBackground;
     playButtonTexture = resourceManager.TextureMainMenuPlayButton;
@@ -31,7 +38,7 @@ SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager resourceManag
 }
 
 void SP::Scene::MainMenu::Update(float deltaUTime) {
-
+    inputManager.ProcessInput();
 }
 
 void SP::Scene::MainMenu::Render(sf::RenderWindow *window, float deltaRTime) {
@@ -60,4 +67,10 @@ void SP::Scene::MainMenu::Render(sf::RenderWindow *window, float deltaRTime) {
     playButtonSprite.setScale(imageScale, imageScale);
     playButtonSprite.setPosition(windowSize.x / 2, windowSize.y / 5 * 4);
     window->draw(playButtonSprite);
+
+    playButton->UpdateArea(static_cast<sf::IntRect>(playButtonSprite.getGlobalBounds()));
+}
+
+void playButtonCallback() {
+    printf("Button pressed!");
 }

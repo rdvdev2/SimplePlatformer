@@ -14,7 +14,7 @@ SP::Scene::Scene* currentScene;
 int main() {
     auto videoMode = chooseWindowSettings();
     sf::RenderWindow window(videoMode.first, "Simple Platformer", videoMode.second);
-    currentScene = new SP::Scene::MainMenu(resourceManager);
+    currentScene = new SP::Scene::MainMenu(resourceManager, window);
 
     while (window.isOpen())
     {
@@ -31,10 +31,10 @@ int main() {
                 window.close();
         }
 
+        currentScene->Update(0);
+
         window.clear();
-
         currentScene->Render(&window, 0);
-
         window.display();
     }
 
