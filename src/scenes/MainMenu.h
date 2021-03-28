@@ -20,6 +20,12 @@ namespace SP::Scene {
         void AdjustToWindowSize(sf::Vector2u windowSize);
 
         SP::Input::Menu::MenuInputManager inputManager;
+        SP::Input::Menu::Button* playButton;
+
+        sf::Sprite backgroundSprite;
+        sf::Sprite playButtonSprite;
+        sf::Text titleText;
+        sf::Text authorsText;
     };
 }
 

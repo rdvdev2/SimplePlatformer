@@ -1,12 +1,5 @@
 #include "MainMenu.h"
 
-SP::Input::Menu::Button* playButton;
-
-sf::Sprite backgroundSprite;
-sf::Sprite playButtonSprite;
-sf::Text titleText;
-sf::Text authorsText;
-
 void playButtonCallback();
 
 SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager& resourceManager, sf::Window& window) : inputManager(window) {
