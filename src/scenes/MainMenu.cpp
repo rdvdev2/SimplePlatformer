@@ -2,10 +2,6 @@
 
 SP::Input::Menu::Button* playButton;
 
-sf::Font moonhouseFont;
-sf::Texture backgroundTexture;
-sf::Texture playButtonTexture;
-
 sf::Sprite backgroundSprite;
 sf::Sprite playButtonSprite;
 sf::Text titleText;
@@ -13,28 +9,24 @@ sf::Text authorsText;
 
 void playButtonCallback();
 
-SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager resourceManager, sf::Window& window) : inputManager(window) {
+SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager& resourceManager, sf::Window& window) : inputManager(window) {
     playButton = new SP::Input::Menu::Button(sf::IntRect(), playButtonCallback);
     inputManager.AddButton(playButton);
 
-    moonhouseFont = resourceManager.FontMoonhouse;
-    backgroundTexture = resourceManager.TextureMainMenuBackground;
-    playButtonTexture = resourceManager.TextureMainMenuPlayButton;
-
-    backgroundSprite.setTexture(backgroundTexture);
+    backgroundSprite.setTexture(resourceManager.TextureMainMenuBackground);
     backgroundSprite.setColor(sf::Color(255, 0, 0));
 
-    titleText.setFont(moonhouseFont);
+    titleText.setFont(resourceManager.FontMoonhouse);
     titleText.setString("Simple Platformer");
     titleText.setFillColor(sf::Color(255, 255, 255));
     titleText.setStyle(sf::Text::Regular);
 
-    authorsText.setFont(moonhouseFont);
+    authorsText.setFont(resourceManager.FontMoonhouse);
     authorsText.setString("by Victor & Roger");
     authorsText.setFillColor(sf::Color(255, 255, 255));
     authorsText.setStyle(sf::Text::Italic);
 
-    playButtonSprite.setTexture(playButtonTexture);
+    playButtonSprite.setTexture(resourceManager.TextureMainMenuPlayButton);
 }
 
 void SP::Scene::MainMenu::Update(float deltaUTime) {

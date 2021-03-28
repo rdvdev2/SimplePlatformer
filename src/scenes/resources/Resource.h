@@ -12,10 +12,10 @@ namespace SP::Scene::Resource {
         explicit Resource(std::string filename) : filename(std::move(filename)) {};
 
         virtual void Load() = 0;
-        T Get() {
+        T& Get() {
             return resource;
         }
-        operator T() {
+        operator T&() {
             return Get();
         }
 

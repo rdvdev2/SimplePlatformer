@@ -9,7 +9,7 @@ namespace SP::Scene {
 
     class MainMenu: public Scene {
     public:
-        explicit MainMenu(Resource::ResourceManager resourceManager, sf::Window& window);
+        explicit MainMenu(Resource::ResourceManager& resourceManager, sf::Window& window);
 
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow *window, float deltaRTime) override;
