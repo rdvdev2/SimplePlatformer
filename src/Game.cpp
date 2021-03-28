@@ -1,3 +1,5 @@
+#include <chrono>
+
 #include "Game.h"
 
 void SP::Game::Run() {
@@ -22,6 +24,9 @@ void SP::Game::Init() {
 }
 
 void SP::Game::GameLoop() {
+    auto lastUTime = std::chrono::high_resolution_clock::now();
+    auto lastRTime = std::chrono::high_resolution_clock::now();
+
     while (window->isOpen())
     {
         sf::Event event;
@@ -38,11 +43,17 @@ void SP::Game::GameLoop() {
                 window->close();
         }
 
-        currentScene->Update(0);
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        float deltaUTime = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - lastUTime).count();
+        currentScene->Update(deltaUTime);
+        lastUTime = currentTime;
 
+        currentTime = std::chrono::high_resolution_clock::now();
+        float deltaRTime = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - lastRTime).count();
         window->clear();
-        currentScene->Render(*window, 0);
+        currentScene->Render(*window, deltaRTime);
         window->display();
+        lastRTime = currentTime;
     }
 }
 
