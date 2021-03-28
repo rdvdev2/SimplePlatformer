@@ -26,6 +26,7 @@ int main() {
             if (event.type == sf::Event::Resized) {
                 sf::FloatRect newArea(0, 0, event.size.width, event.size.height);
                 window.setView(sf::View(newArea));
+                currentScene->OnWindowResize(window.getSize());
             }
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 window.close();
