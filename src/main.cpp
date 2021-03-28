@@ -35,7 +35,7 @@ int main() {
         currentScene->Update(0);
 
         window.clear();
-        currentScene->Render(&window, 0);
+        currentScene->Render(window, 0);
         window.display();
     }
 

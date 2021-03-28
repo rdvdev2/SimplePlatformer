@@ -56,11 +56,11 @@ void SP::Scene::MainMenu::Update(float deltaUTime) {
     inputManager.ProcessInput();
 }
 
-void SP::Scene::MainMenu::Render(sf::RenderWindow *window, float deltaRTime) {
-    window->draw(backgroundSprite);
-    window->draw(titleText);
-    window->draw(authorsText);
-    window->draw(playButtonSprite);
+void SP::Scene::MainMenu::Render(sf::RenderWindow &window, float deltaRTime) {
+    window.draw(backgroundSprite);
+    window.draw(titleText);
+    window.draw(authorsText);
+    window.draw(playButtonSprite);
 }
 
 void playButtonCallback() {

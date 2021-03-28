@@ -12,7 +12,7 @@ namespace SP::Scene {
         explicit MainMenu(Resource::ResourceManager& resourceManager, sf::Window& window);
 
         void Update(float deltaUTime) override;
-        void Render(sf::RenderWindow *window, float deltaRTime) override;
+        void Render(sf::RenderWindow &window, float deltaRTime) override;
 
         void OnWindowResize(sf::Vector2u windowSize) override;
 

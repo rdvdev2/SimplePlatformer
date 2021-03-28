@@ -8,7 +8,7 @@ namespace SP::Scene {
     class Scene {
     public:
         virtual void Update(float deltaUTime) = 0;
-        virtual void Render(sf::RenderWindow *window, float deltaRTime) = 0;
+        virtual void Render(sf::RenderWindow &window, float deltaRTime) = 0;
 
         virtual void OnWindowResize(sf::Vector2u windowSize) {}
     };
