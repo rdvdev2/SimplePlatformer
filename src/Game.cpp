@@ -21,7 +21,7 @@ std::pair<sf::VideoMode, sf::Uint32> chooseWindowSettings(SP::Userdata::Settings
 void SP::Game::Init() {
     auto videoMode = chooseWindowSettings(*userdata.settings);
     window = std::make_unique<sf::RenderWindow>(videoMode.first, "Simple Platformer", videoMode.second);
-    currentScene = std::make_unique<SP::Scene::MainMenu>(resourceManager, *window);
+    nextUpdateScene = std::make_unique<SP::Scene::MainMenu>(*this);
 }
 
 void SP::Game::GameLoop() {
@@ -30,6 +30,11 @@ void SP::Game::GameLoop() {
 
     while (window->isOpen())
     {
+        if (nextUpdateScene) {
+            currentScene.swap(nextUpdateScene);
+            nextUpdateScene.reset();
+        }
+
         sf::Event event;
         while (window->pollEvent(event))
         {
@@ -66,4 +71,8 @@ void SP::Game::Cleanup() {
         userdata.settings->SetWindowWidth(window->getSize().x);
         userdata.settings->SetWindowHeight(window->getSize().y);
     }
+}
+
+void SP::Game::SetNextUpdateScene(std::unique_ptr<SP::Scene::Scene> newScene) {
+    nextUpdateScene.swap(newScene);
 }

@@ -1,27 +1,28 @@
 #include "MainMenu.h"
+#include "../Game.h"
 
 void playButtonCallback(void* data);
 
-SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager& resourceManager, sf::Window& window) : inputManager(window) {
-    playButton = new SP::Input::Menu::Button(sf::IntRect(), playButtonCallback, &window);
+SP::Scene::MainMenu::MainMenu(SP::Game& game) : Scene(game), inputManager(*game.window) {
+    playButton = new SP::Input::Menu::Button(sf::IntRect(), playButtonCallback, &game);
     inputManager.AddButton(playButton);
 
-    backgroundSprite.setTexture(resourceManager.TextureMainMenuBackground);
+    backgroundSprite.setTexture(game.resourceManager.TextureMainMenuBackground);
     backgroundSprite.setColor(sf::Color(255, 0, 0));
 
-    titleText.setFont(resourceManager.FontMoonhouse);
+    titleText.setFont(game.resourceManager.FontMoonhouse);
     titleText.setString("Simple Platformer");
     titleText.setFillColor(sf::Color(255, 255, 255));
     titleText.setStyle(sf::Text::Regular);
 
-    authorsText.setFont(resourceManager.FontMoonhouse);
+    authorsText.setFont(game.resourceManager.FontMoonhouse);
     authorsText.setString("by Victor & Roger");
     authorsText.setFillColor(sf::Color(255, 255, 255));
     authorsText.setStyle(sf::Text::Italic);
 
-    playButtonSprite.setTexture(resourceManager.TextureMainMenuPlayButton);
+    playButtonSprite.setTexture(game.resourceManager.TextureMainMenuPlayButton);
 
-    AdjustToWindowSize(window.getSize());
+    AdjustToWindowSize(game.window->getSize());
 }
 
 void SP::Scene::MainMenu::OnWindowResize(sf::Vector2u windowSize) {
@@ -64,6 +65,6 @@ void SP::Scene::MainMenu::Render(sf::RenderWindow &window, float deltaRTime) {
 }
 
 void playButtonCallback(void* data) {
-    auto window = (sf::Window*) data;
-    window->close();
+    auto game = (SP::Game*) data;
+    game->SetNextUpdateScene(std::unique_ptr<SP::Scene::Scene>());
 }

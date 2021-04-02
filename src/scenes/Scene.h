@@ -3,14 +3,22 @@
 
 #include <SFML/Graphics.hpp>
 
+namespace SP {
+    class Game;
+}
+
 namespace SP::Scene {
 
     class Scene {
     public:
+        explicit Scene(Game& game): game(game) {};
+
         virtual void Update(float deltaUTime) = 0;
         virtual void Render(sf::RenderWindow &window, float deltaRTime) = 0;
 
         virtual void OnWindowResize(sf::Vector2u windowSize) {}
+
+        SP::Game& game;
     };
 }
 
