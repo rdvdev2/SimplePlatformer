@@ -6,11 +6,11 @@
 
 namespace SP::Input::Menu {
 
-    typedef void (*ButtonCallback)();
+    typedef void (*ButtonCallback)(void* data);
 
     class Button {
     public:
-        Button(sf::IntRect area, ButtonCallback callback) : area(area), callback(callback) {}
+        Button(sf::IntRect area, ButtonCallback callback, void* callbackData) : area(area), callback(callback), callbackData(callbackData) {}
 
         void ProcessInput(InputManager& inputManager);
         void UpdateArea(sf::IntRect newArea);
@@ -18,6 +18,7 @@ namespace SP::Input::Menu {
     private:
         sf::IntRect area;
         ButtonCallback callback;
+        void* callbackData;
         bool clicked = false;
     };
 }

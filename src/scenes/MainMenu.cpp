@@ -1,9 +1,9 @@
 #include "MainMenu.h"
 
-void playButtonCallback();
+void playButtonCallback(void* data);
 
 SP::Scene::MainMenu::MainMenu(SP::Scene::Resource::ResourceManager& resourceManager, sf::Window& window) : inputManager(window) {
-    playButton = new SP::Input::Menu::Button(sf::IntRect(), playButtonCallback);
+    playButton = new SP::Input::Menu::Button(sf::IntRect(), playButtonCallback, &window);
     inputManager.AddButton(playButton);
 
     backgroundSprite.setTexture(resourceManager.TextureMainMenuBackground);
@@ -63,6 +63,7 @@ void SP::Scene::MainMenu::Render(sf::RenderWindow &window, float deltaRTime) {
     window.draw(playButtonSprite);
 }
 
-void playButtonCallback() {
-    printf("Button pressed!");
+void playButtonCallback(void* data) {
+    auto window = (sf::Window*) data;
+    window->close();
 }

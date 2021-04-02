@@ -6,7 +6,7 @@ void SP::Input::Menu::Button::ProcessInput(SP::Input::InputManager& inputManager
     } else {
         if (inputManager.IsLMB() && area.contains(inputManager.GetMousePosition())) {
             clicked = true;
-            callback();
+            callback(callbackData);
         }
     }
 }
