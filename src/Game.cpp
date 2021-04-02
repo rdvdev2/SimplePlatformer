@@ -1,6 +1,7 @@
 #include <chrono>
 
 #include "Game.h"
+#include "scenes/MainMenu.h"
 
 void SP::Game::Run() {
     this->Init();

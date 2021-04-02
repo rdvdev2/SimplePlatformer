@@ -5,7 +5,7 @@
 #include <utility>
 
 #include "userdata/UserdataManager.h"
-#include "scenes/MainMenu.h"
+#include "scenes/Scene.h"
 #include "scenes/resources/ResourceManager.h"
 
 namespace SP {
