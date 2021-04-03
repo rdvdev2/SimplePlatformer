@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "../Game.h"
+#include "GameplayScene.h"
 
 void playButtonCallback(void* data);
 
@@ -66,5 +67,5 @@ void SP::Scene::MainMenu::Render(sf::RenderWindow &window, float deltaRTime) {
 
 void playButtonCallback(void* data) {
     auto game = (SP::Game*) data;
-    game->SetNextUpdateScene(std::unique_ptr<SP::Scene::Scene>());
+    game->SetNextUpdateScene(std::make_unique<SP::Scene::GameplayScene>(*game));
 }
