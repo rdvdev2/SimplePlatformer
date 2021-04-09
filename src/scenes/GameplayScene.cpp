@@ -1,7 +1,8 @@
 #include "GameplayScene.h"
+#include "../Game.h"
 
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game) : Scene(game) {
-
+    game.window->setView(sceneView);
 }
 
 void SP::Scene::GameplayScene::Update(float deltaUTime) {
@@ -18,8 +19,4 @@ void SP::Scene::GameplayScene::Render(sf::RenderWindow &window, float deltaRTime
     for (auto gameObject: gameObjects) {
         gameObject.Render(deltaRTime, sf::Transform::Identity);
     }
-}
-
-void SP::Scene::GameplayScene::OnWindowResize(sf::Vector2u windowSize) {
-    // TODO: Calculate view transform
 }
