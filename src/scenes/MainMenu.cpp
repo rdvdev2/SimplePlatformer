@@ -27,6 +27,9 @@ SP::Scene::MainMenu::MainMenu(SP::Game& game) : Scene(game), inputManager(*game.
 }
 
 void SP::Scene::MainMenu::OnWindowResize(sf::Vector2u windowSize) {
+    sf::FloatRect newArea(0, 0, windowSize.x, windowSize.y);
+    game.window->setView(sf::View(newArea));
+
     AdjustToWindowSize(windowSize);
 }
 
