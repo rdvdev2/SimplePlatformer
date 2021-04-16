@@ -17,6 +17,6 @@ void SP::Scene::GameplayScene::Update(float deltaUTime) {
 
 void SP::Scene::GameplayScene::Render(sf::RenderWindow &window, float deltaRTime) {
     for (auto gameObject: gameObjects) {
-        gameObject.Render(deltaRTime, sf::Transform::Identity);
+        gameObject.Render(deltaRTime);
     }
 }
