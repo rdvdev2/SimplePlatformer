@@ -43,8 +43,6 @@ void SP::Game::GameLoop() {
             if (event.type == sf::Event::Resized) {
                 currentScene->OnWindowResize(sf::Vector2u(event.size.width, event.size.height));
             }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-                window->close();
         }
 
         auto currentTime = std::chrono::high_resolution_clock::now();
@@ -69,6 +67,10 @@ void SP::Game::Cleanup() {
         userdata.settings->SetWindowWidth(window->getSize().x);
         userdata.settings->SetWindowHeight(window->getSize().y);
     }
+}
+
+void SP::Game::Close() {
+    window->close();
 }
 
 void SP::Game::SetNextUpdateScene(std::unique_ptr<SP::Scene::Scene> newScene) {

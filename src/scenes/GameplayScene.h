@@ -5,6 +5,7 @@
 
 #include "Scene.h"
 #include "gameplay/IGameObject.h"
+#include "../input/GameplayInputManager.h"
 
 namespace SP::Scene {
 
@@ -19,6 +20,8 @@ namespace SP::Scene {
 
     private:
         std::list<SP::Scene::Gameplay::IGameObject> gameObjects;
+
+        SP::Input::GameplayInputManager inputManager;
     };
 }
 

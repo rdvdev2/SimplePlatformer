@@ -13,6 +13,7 @@ namespace SP {
     class Game {
     public:
         void Run();
+        void Close();
 
         void SetNextUpdateScene(std::unique_ptr<SP::Scene::Scene> newScene);
 
