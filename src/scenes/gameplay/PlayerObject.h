@@ -19,10 +19,12 @@ namespace SP::Scene::Gameplay {
     private:
         SP::Input::GameplayInputManager &inputManager;
 
+        float mass = 1;
+        sf::Vector2f force;
         sf::Vector2f velocity;
 
-        float timeToSwap;
-        int currentFrame;
+        float timeToSwap = 0;
+        int currentFrame = 0;
         sf::Sprite sprite0;
         sf::Sprite sprite1;
     };

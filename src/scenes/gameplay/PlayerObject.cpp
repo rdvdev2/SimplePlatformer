@@ -4,16 +4,20 @@
 #define ANIMATION_FRAMES 2
 
 SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager)
-        : IGameObject(100), inputManager(inputManager), currentFrame(0), timeToSwap(0) {
+        : IGameObject(100), inputManager(inputManager) {
 
     sprite0.setTexture(resourceManager.TexturePlayer0);
     sprite1.setTexture(resourceManager.TexturePlayer1);
 }
 
 void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
-    velocity = sf::Vector2f(0, 0);
-    if (inputManager.IsLeft()) velocity += sf::Vector2f(-100, 0);
-    if (inputManager.IsRight()) velocity += sf::Vector2f(100, 0);
+    force = sf::Vector2f(0, 0);
+    if (inputManager.IsLeft()) force += sf::Vector2f(-50, 0); // TODO: Only work if grounded
+    if (inputManager.IsRight()) force += sf::Vector2f(50, 0);
+
+    force += sf::Vector2f(0, -9.8); // Gravity
+
+    velocity += (force / mass) * 10.0f * deltaUTime;
     this->SetPosition(this->GetPosition() + (velocity * deltaUTime));
 }
 
@@ -25,8 +29,10 @@ void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float d
     imageOutline = sprite1.getLocalBounds();
     sprite1.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
 
-    sprite0.setPosition(this->GetPosition());
-    sprite1.setPosition(this->GetPosition());
+    auto renderingPos = this->GetPosition();
+    renderingPos.y *= -1;
+    sprite0.setPosition(renderingPos);
+    sprite1.setPosition(renderingPos);
 
     if (velocity.x > 0) {
         sprite0.setScale(-std::abs(sprite0.getScale().x), sprite0.getScale().y);
