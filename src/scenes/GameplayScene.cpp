@@ -1,10 +1,14 @@
 #include "GameplayScene.h"
 #include "../Game.h"
 #include "gameplay/PlayerObject.h"
+#include "gameplay/FlatPlatformObject.h"
 
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game) : Scene(game), inputManager(*game.window) {
     game.window->setView(sceneView);
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager));
+    gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::FlatPlatformObject>(game.resourceManager));
+    gameObjects.back()->SetPosition(sf::Vector2f(0, -100));
+
 }
 
 void SP::Scene::GameplayScene::Update(float deltaUTime) {

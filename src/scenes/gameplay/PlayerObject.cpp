@@ -19,6 +19,8 @@ void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
 
     velocity += (force / mass) * 10.0f * deltaUTime;
     this->SetPosition(this->GetPosition() + (velocity * deltaUTime));
+
+    this->colliderBox = sf::FloatRect(this->GetPosition().x - 0.5, this->GetPosition().y - 0.5, 1, 1); // TODO: Fix size
 }
 
 void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float deltaRTime) {
@@ -49,4 +51,8 @@ void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float d
     }
     if (currentFrame == 0) window.draw(sprite0);
     else if (currentFrame == 1) window.draw(sprite1);
+}
+
+sf::FloatRect SP::Scene::Gameplay::PlayerObject::GetColliderBox() {
+    return colliderBox;
 }

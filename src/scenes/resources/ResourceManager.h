@@ -29,7 +29,9 @@ namespace SP::Scene::Resource {
             TextureGameBackgroundLayer1.Load();
             TextureGameBackgroundLayer2.Load();
             TextureGround.Load();
+            TextureGround.Get().setSmooth(false);
             TextureGroundSlope.Load();
+            TextureGroundSlope.Get().setSmooth(false);
             TextureLightning.Load();
         }
 
