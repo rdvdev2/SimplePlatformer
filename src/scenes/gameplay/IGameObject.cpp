@@ -20,6 +20,6 @@ void SP::Scene::Gameplay::IGameObject::Update(float deltaUTime) {
 
 }
 
-void SP::Scene::Gameplay::IGameObject::Render(float deltaRTime) {
+void SP::Scene::Gameplay::IGameObject::Render(sf::RenderWindow &window, float deltaRTime) {
 
 }

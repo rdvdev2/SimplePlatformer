@@ -19,7 +19,7 @@ namespace SP::Scene {
         sf::View sceneView = sf::View(sf::Vector2f(), sf::Vector2f(512, 384));
 
     private:
-        std::list<SP::Scene::Gameplay::IGameObject> gameObjects;
+        std::list<std::unique_ptr<SP::Scene::Gameplay::IGameObject>> gameObjects;
 
         SP::Input::GameplayInputManager inputManager;
     };

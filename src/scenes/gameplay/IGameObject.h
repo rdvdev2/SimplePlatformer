@@ -15,7 +15,7 @@ namespace SP::Scene::Gameplay {
         int GetRenderDepth() const;
 
         virtual void Update(float deltaUTime);
-        virtual void Render(float deltaRTime);
+        virtual void Render(sf::RenderWindow &window, float deltaRTime);
 
     protected:
         sf::Vector2f position;
