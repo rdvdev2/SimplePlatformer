@@ -2,13 +2,14 @@
 #include "../Game.h"
 #include "gameplay/PlayerObject.h"
 #include "gameplay/FlatPlatformObject.h"
+#include "gameplay/BackgroundParallaxObject.h"
 
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game) : Scene(game), inputManager(*game.window) {
     game.window->setView(sceneView);
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager, *this));
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::FlatPlatformObject>(game.resourceManager));
     gameObjects.back()->SetPosition(sf::Vector2f(0, -100));
-
+    gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::BackgroundParallaxObject>(game.resourceManager));
 }
 
 void SP::Scene::GameplayScene::Update(float deltaUTime) {
