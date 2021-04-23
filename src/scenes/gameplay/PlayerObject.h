@@ -7,12 +7,13 @@
 #include "ICollidable.h"
 #include "../../input/GameplayInputManager.h"
 #include "../resources/ResourceManager.h"
+#include "../GameplayScene.h"
 
 namespace SP::Scene::Gameplay {
 
     class PlayerObject : public IGameObject, public ICollidable {
     public:
-        PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager);
+        PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager, SP::Scene::GameplayScene &gameplayScene);
 
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
@@ -21,6 +22,7 @@ namespace SP::Scene::Gameplay {
 
     private:
         SP::Input::GameplayInputManager &inputManager;
+        SP::Scene::GameplayScene &gameplayScene;
 
         float mass = 1;
         sf::Vector2f force;

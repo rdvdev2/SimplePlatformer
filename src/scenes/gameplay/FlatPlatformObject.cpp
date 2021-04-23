@@ -7,7 +7,7 @@ SP::Scene::Gameplay::FlatPlatformObject::FlatPlatformObject(SP::Scene::Resource:
 }
 
 void SP::Scene::Gameplay::FlatPlatformObject::Update(float deltaUTime) {
-    colliderBox = sf::FloatRect(this->GetPosition().x - 0.5, this->GetPosition().y - 0.5, 1, 1);
+    colliderBox = sprite.getGlobalBounds(); // TODO: Fix collider or separate tree from platform
 }
 
 void SP::Scene::Gameplay::FlatPlatformObject::Render(sf::RenderWindow &window, float deltaRTime) {

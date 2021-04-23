@@ -1,10 +1,12 @@
 #include "PlayerObject.h"
 
+#include <cmath>
+
 #define ANIMATION_FPS 3
 #define ANIMATION_FRAMES 2
 
-SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager)
-        : IGameObject(100), inputManager(inputManager) {
+SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager, SP::Scene::GameplayScene &gameplayScene)
+        : IGameObject(100), inputManager(inputManager), gameplayScene(gameplayScene) {
 
     sprite0.setTexture(resourceManager.TexturePlayer0);
     sprite1.setTexture(resourceManager.TexturePlayer1);
@@ -17,10 +19,23 @@ void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
 
     force += sf::Vector2f(0, -9.8); // Gravity
 
+    // Collisions
+    auto collisionVector = this->gameplayScene.ComputeCollisionsOf(*this);
+    auto collisionStrength = std::sqrt((collisionVector.x * collisionVector.x) + (collisionVector.y * collisionVector.y));
+    if (collisionStrength != 0) {
+        auto forceStrength = std::sqrt((force.x * force.x) + (force.y * force.y));
+        if (forceStrength >= 1.0f) collisionVector *= forceStrength;
+        force += (collisionVector / collisionStrength) * 100.0f;
+    }
+
     velocity += (force / mass) * 10.0f * deltaUTime;
+    if (collisionStrength != 0 && collisionStrength <= 0.1f) {
+        if (collisionVector.x != 0) velocity.x = 0;
+        if (collisionVector.y != 0) velocity.y = 0;
+    }
     this->SetPosition(this->GetPosition() + (velocity * deltaUTime));
 
-    this->colliderBox = sf::FloatRect(this->GetPosition().x - 0.5, this->GetPosition().y - 0.5, 1, 1); // TODO: Fix size
+    this->colliderBox = sprite0.getGlobalBounds();
 }
 
 void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float deltaRTime) {
