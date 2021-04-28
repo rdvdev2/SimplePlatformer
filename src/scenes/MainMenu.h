@@ -14,10 +14,9 @@ namespace SP::Scene {
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
-        void OnWindowResize(sf::Vector2u windowSize) override;
+        void AdjustToWindowSize(sf::Vector2u windowSize) override;
 
     private:
-        void AdjustToWindowSize(sf::Vector2u windowSize);
 
         SP::Input::Menu::MenuInputManager inputManager;
         SP::Input::Menu::Button* playButton;

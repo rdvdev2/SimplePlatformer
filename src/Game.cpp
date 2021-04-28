@@ -32,6 +32,7 @@ void SP::Game::GameLoop() {
     {
         if (nextUpdateScene) {
             currentScene.swap(nextUpdateScene);
+            currentScene->AdjustToWindowSize(window->getSize());
             nextUpdateScene.reset();
         }
 
@@ -41,7 +42,7 @@ void SP::Game::GameLoop() {
             if (event.type == sf::Event::Closed)
                 window->close();
             if (event.type == sf::Event::Resized) {
-                currentScene->OnWindowResize(sf::Vector2u(event.size.width, event.size.height));
+                currentScene->AdjustToWindowSize(sf::Vector2u(event.size.width, event.size.height));
             }
         }
 

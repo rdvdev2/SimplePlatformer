@@ -22,18 +22,12 @@ SP::Scene::MainMenu::MainMenu(SP::Game& game) : Scene(game), inputManager(*game.
     authorsText.setStyle(sf::Text::Italic);
 
     playButtonSprite.setTexture(game.resourceManager.TextureMainMenuPlayButton);
-
-    AdjustToWindowSize(game.window->getSize());
-}
-
-void SP::Scene::MainMenu::OnWindowResize(sf::Vector2u windowSize) {
-    sf::FloatRect newArea(0, 0, windowSize.x, windowSize.y);
-    game.window->setView(sf::View(newArea));
-
-    AdjustToWindowSize(windowSize);
 }
 
 void SP::Scene::MainMenu::AdjustToWindowSize(sf::Vector2u windowSize) {
+    sf::FloatRect newArea(0, 0, windowSize.x, windowSize.y);
+    game.window->setView(sf::View(newArea));
+
     auto imageOutline = backgroundSprite.getLocalBounds();
     float imageScale = std::max(windowSize.x / imageOutline.width, windowSize.y / imageOutline.height);
     backgroundSprite.setScale(imageScale, imageScale);

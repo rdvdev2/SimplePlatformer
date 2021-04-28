@@ -17,7 +17,7 @@ namespace SP::Scene {
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
-        void OnWindowResize(sf::Vector2u windowSize) override;
+        void AdjustToWindowSize(sf::Vector2u windowSize) override;
 
         sf::View sceneView = sf::View(sf::Vector2f(), sf::Vector2f(30, 20));
 

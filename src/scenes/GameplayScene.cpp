@@ -48,7 +48,7 @@ void SP::Scene::GameplayScene::Render(sf::RenderWindow &window, float deltaRTime
     }
 }
 
-void SP::Scene::GameplayScene::OnWindowResize(sf::Vector2u windowSize) {
+void SP::Scene::GameplayScene::AdjustToWindowSize(sf::Vector2u windowSize) {
     sf::FloatRect viewport(0, 0, 1, 1);
 
     float screenWidth = windowSize.x / sceneView.getSize().x;
