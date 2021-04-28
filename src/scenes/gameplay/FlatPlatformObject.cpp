@@ -24,6 +24,9 @@ void SP::Scene::Gameplay::FlatPlatformObject::CreatePhysicsBody(b2World &physics
 
     b2PolygonShape shape;
     shape.SetAsBox(4.5, 0.5);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.userData.pointer = SP_FIXTURE_TYPE_GROUND;
     physicsBody->CreateFixture(&shape, 0.0f);
 }
 

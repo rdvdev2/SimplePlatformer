@@ -11,7 +11,7 @@
 
 namespace SP::Scene::Gameplay {
 
-    class PlayerObject : public IGameObject, public IPhysicsObject {
+    class PlayerObject : public IGameObject, public IPhysicsObject, public b2ContactListener {
     public:
         PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager, SP::Scene::GameplayScene &gameplayScene);
 
@@ -21,11 +21,15 @@ namespace SP::Scene::Gameplay {
         void CreatePhysicsBody(b2World &physicsWorld) override;
         b2Body* GetPhysicsBody() override;
 
+        void BeginContact(b2Contact* contact) override;
+        void EndContact(b2Contact* contact) override;
+
     private:
         SP::Input::GameplayInputManager &inputManager;
         SP::Scene::GameplayScene &gameplayScene;
 
         b2Body* physicsBody = nullptr;
+        int footContacts;
 
         float timeToSwap = 0;
         int currentFrame = 0;
