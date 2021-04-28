@@ -6,7 +6,7 @@
 
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game) : Scene(game), inputManager(*game.window), physicsWorld(b2Vec2(0.0f, -9.8f)) {
     game.window->setView(sceneView);
-    gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager, *this));
+    gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager));
     gameObjects.back()->SetPosition(sf::Vector2f(0, 3));
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::FlatPlatformObject>(game.resourceManager));
     gameObjects.back()->SetPosition(sf::Vector2f(0, 0));

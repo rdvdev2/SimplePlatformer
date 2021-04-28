@@ -13,7 +13,7 @@ namespace SP::Scene::Gameplay {
 
     class PlayerObject : public IGameObject, public IPhysicsObject, public b2ContactListener {
     public:
-        PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager, SP::Scene::GameplayScene &gameplayScene);
+        PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager);
 
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
@@ -26,10 +26,9 @@ namespace SP::Scene::Gameplay {
 
     private:
         SP::Input::GameplayInputManager &inputManager;
-        SP::Scene::GameplayScene &gameplayScene;
 
         b2Body* physicsBody = nullptr;
-        int footContacts;
+        int footContacts = 0;
 
         float timeToSwap = 0;
         int currentFrame = 0;

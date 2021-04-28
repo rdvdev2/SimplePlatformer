@@ -1,12 +1,10 @@
 #include "PlayerObject.h"
 
-#include <cmath>
-
 #define ANIMATION_FPS 3
 #define ANIMATION_FRAMES 2
 
-SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager, SP::Scene::GameplayScene &gameplayScene)
-        : IGameObject(100), inputManager(inputManager), gameplayScene(gameplayScene) {
+SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager)
+        : IGameObject(100), inputManager(inputManager) {
 
     sprite0.setSize(sf::Vector2f(1, 2));
     sprite1.setSize(sf::Vector2f(1, 2));
