@@ -8,6 +8,8 @@
 SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager, SP::Scene::GameplayScene &gameplayScene)
         : IGameObject(100), inputManager(inputManager), gameplayScene(gameplayScene) {
 
+    sprite0.setSize(sf::Vector2f(1, 2));
+    sprite1.setSize(sf::Vector2f(1, 2));
     sprite0.setTexture(resourceManager.TexturePlayer0);
     sprite1.setTexture(resourceManager.TexturePlayer1);
 }
@@ -17,8 +19,6 @@ void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
 }
 
 void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float deltaRTime) {
-
-    // TODO: Set origin on window resize?
     auto imageOutline = sprite0.getLocalBounds();
     sprite0.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
     imageOutline = sprite1.getLocalBounds();
@@ -53,7 +53,7 @@ void SP::Scene::Gameplay::PlayerObject::CreatePhysicsBody(b2World &physicsWorld)
     physicsBody = physicsWorld.CreateBody(&bodyDef);
 
     b2PolygonShape shape;
-    shape.SetAsBox(1.0f, 1.0f);
+    shape.SetAsBox(0.5f, 1.0f);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;

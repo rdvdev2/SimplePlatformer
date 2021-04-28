@@ -19,7 +19,7 @@ namespace SP::Scene::Gameplay {
     private:
         b2Body* physicsBody = nullptr;
 
-        sf::Sprite sprite;
+        sf::RectangleShape sprite;
     };
 }
 

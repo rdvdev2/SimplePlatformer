@@ -7,9 +7,9 @@
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game) : Scene(game), inputManager(*game.window), physicsWorld(b2Vec2(0.0f, -9.8f)) {
     game.window->setView(sceneView);
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager, *this));
-    gameObjects.back()->SetPosition(sf::Vector2f(0, 4));
+    gameObjects.back()->SetPosition(sf::Vector2f(0, 3));
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::FlatPlatformObject>(game.resourceManager));
-    gameObjects.back()->SetPosition(sf::Vector2f(0, -10));
+    gameObjects.back()->SetPosition(sf::Vector2f(0, 0));
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::BackgroundParallaxObject>(game.resourceManager));
 
     for (auto&& gameObject: gameObjects) {

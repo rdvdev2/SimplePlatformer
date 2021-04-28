@@ -3,7 +3,10 @@
 SP::Scene::Gameplay::BackgroundParallaxObject::BackgroundParallaxObject(
         SP::Scene::Resource::ResourceManager &resourceManager) : IGameObject(-100) {
 
+    layer0.setSize(sf::Vector2f(20, 8));
     layer0.setTexture(resourceManager.TextureGameBackgroundLayer0);
+
+    layer2.setSize(sf::Vector2f(20, 8));
     layer2.setTexture(resourceManager.TextureGameBackgroundLayer2);
 }
 

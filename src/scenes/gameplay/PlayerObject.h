@@ -29,8 +29,8 @@ namespace SP::Scene::Gameplay {
 
         float timeToSwap = 0;
         int currentFrame = 0;
-        sf::Sprite sprite0;
-        sf::Sprite sprite1;
+        sf::RectangleShape sprite0;
+        sf::RectangleShape sprite1;
     };
 }
 

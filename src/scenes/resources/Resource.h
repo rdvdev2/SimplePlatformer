@@ -19,6 +19,10 @@ namespace SP::Scene::Resource {
             return Get();
         }
 
+        operator T*() {
+            return &resource;
+        }
+
     protected:
         T resource;
         std::string filename;

@@ -17,7 +17,7 @@ namespace SP::Scene {
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
-        sf::View sceneView = sf::View(sf::Vector2f(), sf::Vector2f(512, 384));
+        sf::View sceneView = sf::View(sf::Vector2f(), sf::Vector2f(30, 20));
 
     private:
         std::list<std::unique_ptr<SP::Scene::Gameplay::IGameObject>> gameObjects;

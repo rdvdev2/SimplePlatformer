@@ -14,8 +14,8 @@ namespace SP::Scene::Gameplay {
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
     private:
-        sf::Sprite layer0;
-        sf::Sprite layer2;
+        sf::RectangleShape layer0;
+        sf::RectangleShape layer2;
     };
 }
 
