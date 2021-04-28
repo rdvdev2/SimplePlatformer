@@ -2,22 +2,22 @@
 #define SIMPLEPLATFORMER_FLATPLATFORMOBJECT_H
 
 #include "IGameObject.h"
-#include "ICollidable.h"
+#include "IPhysicsObject.h"
 #include "../resources/ResourceManager.h"
 
 namespace SP::Scene::Gameplay {
 
-    class FlatPlatformObject : public IGameObject, public ICollidable {
+    class FlatPlatformObject : public IGameObject, public IPhysicsObject {
     public:
         explicit FlatPlatformObject(SP::Scene::Resource::ResourceManager &resourceManager);
 
-        void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
-        sf::FloatRect GetColliderBox() override;
+        void CreatePhysicsBody(b2World &world) override;
+        b2Body* GetPhysicsBody() override;
 
     private:
-        sf::FloatRect colliderBox = sf::FloatRect();
+        b2Body* physicsBody = nullptr;
 
         sf::Sprite sprite;
     };

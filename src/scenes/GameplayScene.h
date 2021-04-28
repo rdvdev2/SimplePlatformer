@@ -2,11 +2,11 @@
 #define SIMPLEPLATFORMER_GAMEPLAYSCENE_H
 
 #include <list>
+#include <box2d/box2d.h>
 
 #include "Scene.h"
 #include "gameplay/IGameObject.h"
 #include "../input/GameplayInputManager.h"
-#include "gameplay/ICollidable.h"
 
 namespace SP::Scene {
 
@@ -17,12 +17,11 @@ namespace SP::Scene {
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
-        sf::Vector2f ComputeCollisionsOf(SP::Scene::Gameplay::ICollidable &collidableObject);
-
         sf::View sceneView = sf::View(sf::Vector2f(), sf::Vector2f(512, 384));
 
     private:
         std::list<std::unique_ptr<SP::Scene::Gameplay::IGameObject>> gameObjects;
+        b2World physicsWorld;
 
         SP::Input::GameplayInputManager inputManager;
     };

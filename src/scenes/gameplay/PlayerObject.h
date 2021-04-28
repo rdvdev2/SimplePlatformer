@@ -4,31 +4,28 @@
 #include <SFML/Graphics.hpp>
 
 #include "IGameObject.h"
-#include "ICollidable.h"
+#include "IPhysicsObject.h"
 #include "../../input/GameplayInputManager.h"
 #include "../resources/ResourceManager.h"
 #include "../GameplayScene.h"
 
 namespace SP::Scene::Gameplay {
 
-    class PlayerObject : public IGameObject, public ICollidable {
+    class PlayerObject : public IGameObject, public IPhysicsObject {
     public:
         PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager, SP::Scene::GameplayScene &gameplayScene);
 
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
-        sf::FloatRect GetColliderBox() override;
+        void CreatePhysicsBody(b2World &physicsWorld) override;
+        b2Body* GetPhysicsBody() override;
 
     private:
         SP::Input::GameplayInputManager &inputManager;
         SP::Scene::GameplayScene &gameplayScene;
 
-        float mass = 1;
-        sf::Vector2f force;
-        sf::Vector2f velocity;
-
-        sf::FloatRect colliderBox = sf::FloatRect();
+        b2Body* physicsBody = nullptr;
 
         float timeToSwap = 0;
         int currentFrame = 0;

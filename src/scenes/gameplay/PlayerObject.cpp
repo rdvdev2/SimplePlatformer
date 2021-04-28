@@ -13,29 +13,7 @@ SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager 
 }
 
 void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
-    force = sf::Vector2f(0, 0);
-    if (inputManager.IsLeft()) force += sf::Vector2f(-50, 0); // TODO: Only work if grounded
-    if (inputManager.IsRight()) force += sf::Vector2f(50, 0);
-
-    force += sf::Vector2f(0, -9.8); // Gravity
-
-    // Collisions
-    auto collisionVector = this->gameplayScene.ComputeCollisionsOf(*this);
-    auto collisionStrength = std::sqrt((collisionVector.x * collisionVector.x) + (collisionVector.y * collisionVector.y));
-    if (collisionStrength != 0) {
-        auto forceStrength = std::sqrt((force.x * force.x) + (force.y * force.y));
-        if (forceStrength >= 1.0f) collisionVector *= forceStrength;
-        force += (collisionVector / collisionStrength) * 100.0f;
-    }
-
-    velocity += (force / mass) * 10.0f * deltaUTime;
-    if (collisionStrength != 0 && collisionStrength <= 0.1f) {
-        if (collisionVector.x != 0) velocity.x = 0;
-        if (collisionVector.y != 0) velocity.y = 0;
-    }
-    this->SetPosition(this->GetPosition() + (velocity * deltaUTime));
-
-    this->colliderBox = sprite0.getGlobalBounds();
+    // TODO: Controls
 }
 
 void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float deltaRTime) {
@@ -51,10 +29,10 @@ void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float d
     sprite0.setPosition(renderingPos);
     sprite1.setPosition(renderingPos);
 
-    if (velocity.x > 0) {
+    if (physicsBody->GetLinearVelocity().x > 0) {
         sprite0.setScale(-std::abs(sprite0.getScale().x), sprite0.getScale().y);
         sprite1.setScale(-std::abs(sprite1.getScale().x), sprite1.getScale().y);
-    } else if (velocity.x < 0) {
+    } else if (physicsBody->GetLinearVelocity().x < 0) {
         sprite0.setScale(std::abs(sprite0.getScale().x), sprite0.getScale().y);
         sprite1.setScale(std::abs(sprite1.getScale().x), sprite1.getScale().y);
     }
@@ -68,6 +46,21 @@ void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float d
     else if (currentFrame == 1) window.draw(sprite1);
 }
 
-sf::FloatRect SP::Scene::Gameplay::PlayerObject::GetColliderBox() {
-    return colliderBox;
+void SP::Scene::Gameplay::PlayerObject::CreatePhysicsBody(b2World &physicsWorld) {
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position.Set(position.x, position.y);
+    physicsBody = physicsWorld.CreateBody(&bodyDef);
+
+    b2PolygonShape shape;
+    shape.SetAsBox(1.0f, 1.0f);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.3f;
+    physicsBody->CreateFixture(&fixtureDef);
+}
+
+b2Body* SP::Scene::Gameplay::PlayerObject::GetPhysicsBody() {
+    return physicsBody;
 }
