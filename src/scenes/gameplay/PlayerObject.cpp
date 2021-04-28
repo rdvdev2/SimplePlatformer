@@ -10,6 +10,11 @@ SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager 
     sprite1.setSize(sf::Vector2f(1, 2));
     sprite0.setTexture(resourceManager.TexturePlayer0);
     sprite1.setTexture(resourceManager.TexturePlayer1);
+
+    auto imageOutline = sprite0.getLocalBounds();
+    sprite0.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
+    imageOutline = sprite1.getLocalBounds();
+    sprite1.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
 }
 
 void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
@@ -33,11 +38,6 @@ void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
 }
 
 void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float deltaRTime) {
-    auto imageOutline = sprite0.getLocalBounds();
-    sprite0.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
-    imageOutline = sprite1.getLocalBounds();
-    sprite1.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
-
     auto renderingPos = this->GetPosition();
     renderingPos.y *= -1;
     sprite0.setPosition(renderingPos);

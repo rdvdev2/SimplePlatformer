@@ -4,12 +4,12 @@ SP::Scene::Gameplay::FlatPlatformObject::FlatPlatformObject(SP::Scene::Resource:
 
     sprite.setSize(sf::Vector2f(9, 1));
     sprite.setTexture(resourceManager.TextureGround);
+
+    auto imageOutline = sprite.getLocalBounds();
+    sprite.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
 }
 
 void SP::Scene::Gameplay::FlatPlatformObject::Render(sf::RenderWindow &window, float deltaRTime) {
-    auto imageOutline = sprite.getLocalBounds();
-    sprite.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
-
     auto correctedPos = this->GetPosition();
     correctedPos.y *= -1;
     sprite.setPosition(correctedPos);
