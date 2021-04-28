@@ -2,7 +2,7 @@
 
 SP::Scene::Gameplay::FlatPlatformObject::FlatPlatformObject(SP::Scene::Resource::ResourceManager &resourceManager) : IGameObject(0) {
 
-    sprite.setSize(sf::Vector2f(2, 1));
+    sprite.setSize(sf::Vector2f(9, 1));
     sprite.setTexture(resourceManager.TextureGround);
 }
 
@@ -23,7 +23,7 @@ void SP::Scene::Gameplay::FlatPlatformObject::CreatePhysicsBody(b2World &physics
     physicsBody = physicsWorld.CreateBody(&bodyDef);
 
     b2PolygonShape shape;
-    shape.SetAsBox(1, 0.5);
+    shape.SetAsBox(4.5, 0.5);
     physicsBody->CreateFixture(&shape, 0.0f);
 }
 

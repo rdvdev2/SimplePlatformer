@@ -18,7 +18,9 @@ namespace SP::Scene::Resource {
             TextureGoomba0.Load();
             TextureGoomba1.Load();
             TexturePlayer0.Load();
+            TexturePlayer0.Get().setSmooth(false);
             TexturePlayer1.Load();
+            TexturePlayer1.Get().setSmooth(false);
             TextureZombie0.Load();
             TextureZombie1.Load();
 
@@ -33,6 +35,7 @@ namespace SP::Scene::Resource {
             TextureGroundSlope.Load();
             TextureGroundSlope.Get().setSmooth(false);
             TextureLightning.Load();
+            TextureTree.Load();
         }
 
         FONT(Moonhouse, moonhouse);
@@ -53,6 +56,7 @@ namespace SP::Scene::Resource {
         TEXTURE(Ground, scenery/ground);
         TEXTURE(GroundSlope, scenery/ground_slope);
         TEXTURE(Lightning, scenery/lightning);
+        TEXTURE(Tree, scenery/tree);
     };
 }
 
