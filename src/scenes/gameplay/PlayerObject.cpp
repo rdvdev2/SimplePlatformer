@@ -78,7 +78,7 @@ void SP::Scene::Gameplay::PlayerObject::CreatePhysicsBody(b2World &physicsWorld)
     physicsBody->CreateFixture(&fixtureDef);
 
     // Foot sensor fixture
-    shape.SetAsBox(0.25f, 0.25f, b2Vec2(0, -1), 0);
+    shape.SetAsBox(0.25f, 0.1f, b2Vec2(0, -1), 0);
     fixtureDef.isSensor = true;
     fixtureDef.userData.pointer = SP_FIXTURE_TYPE_FOOT;
     physicsBody->CreateFixture(&fixtureDef);
