@@ -15,6 +15,8 @@ namespace SP::Input::Menu {
         void AddButton(Button* button);
         void ClearButtons();
 
+        bool IsPlayKeyPressed();
+
         void ProcessInput();
 
     private:

@@ -53,6 +53,10 @@ void SP::Scene::MainMenu::AdjustToWindowSize(sf::Vector2u windowSize) {
 
 void SP::Scene::MainMenu::Update(float deltaUTime) {
     inputManager.ProcessInput();
+
+    if (inputManager.IsPlayKeyPressed()) {
+        playButtonCallback(&game);
+    }
 }
 
 void SP::Scene::MainMenu::Render(sf::RenderWindow &window, float deltaRTime) {
