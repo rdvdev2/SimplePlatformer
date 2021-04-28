@@ -15,6 +15,7 @@ add_executable(SimplePlatformer ${SOURCE_FILES})
 target_include_directories(SimplePlatformer PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_compile_features(SimplePlatformer PUBLIC cxx_std_20) # Compile with C++20
 target_link_libraries(SimplePlatformer PRIVATE sfml-graphics sfml-window sfml-system) # Compile against SFML
+target_link_libraries(SimplePlatformer PRIVATE box2d) # Compile against Box2D
 target_link_libraries(SimplePlatformer PRIVATE pulzed::mINI) # Include mINI header
 
 # Installation steps
