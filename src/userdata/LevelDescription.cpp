@@ -9,7 +9,9 @@ SP::Userdata::LevelDescription SP::Userdata::LevelDescription::GetTestLevel() { 
     LevelDescription level;
 
     level.objects.emplace_back(PLAYER, 0, 3);
+    level.objects.emplace_back(FLAT_PLATFORM, -9, 0);
     level.objects.emplace_back(FLAT_PLATFORM, 0, 0);
+    level.objects.emplace_back(FLAT_PLATFORM, 9, 0);
 
     return level;
 }
