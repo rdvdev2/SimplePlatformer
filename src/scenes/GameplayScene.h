@@ -7,12 +7,13 @@
 #include "Scene.h"
 #include "gameplay/IGameObject.h"
 #include "../input/GameplayInputManager.h"
+#include "../userdata/LevelDescription.h"
 
 namespace SP::Scene {
 
     class GameplayScene: public Scene {
     public:
-        explicit GameplayScene(SP::Game& game);
+        explicit GameplayScene(SP::Game& game, const SP::Userdata::LevelDescription& levelDescription = SP::Userdata::LevelDescription::GetTestLevel());
 
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;

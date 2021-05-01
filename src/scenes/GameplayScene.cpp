@@ -4,12 +4,25 @@
 #include "gameplay/FlatPlatformObject.h"
 #include "gameplay/BackgroundParallaxObject.h"
 
-SP::Scene::GameplayScene::GameplayScene(SP::Game &game) : Scene(game), inputManager(*game.window), physicsWorld(b2Vec2(0.0f, -9.8f)) {
+SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::LevelDescription& levelDescription) : Scene(game), inputManager(*game.window), physicsWorld(b2Vec2(0.0f, -9.8f)) {
     game.window->setView(sceneView);
-    gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager));
-    gameObjects.back()->SetPosition(sf::Vector2f(0, 3));
-    gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::FlatPlatformObject>(game.resourceManager));
-    gameObjects.back()->SetPosition(sf::Vector2f(0, 0));
+
+    // Objects from the level description
+    for (auto descriptor: levelDescription.objects) {
+        switch (descriptor.type) {
+            case Userdata::LevelDescription::PLAYER:
+                gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager));
+                break;
+            case Userdata::LevelDescription::FLAT_PLATFORM:
+                gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::FlatPlatformObject>(game.resourceManager));
+                break;
+            default:
+                continue; // Shouldn't happen, but we never know
+        }
+        gameObjects.back()->SetPosition(sf::Vector2f(descriptor.x, descriptor.y));
+    }
+
+    // Default objects
     gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::BackgroundParallaxObject>(game.resourceManager));
 
     for (auto&& gameObject: gameObjects) {
