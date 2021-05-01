@@ -1,20 +1,15 @@
 #include "PlayerObject.h"
 
-#define ANIMATION_FPS 3
-#define ANIMATION_FRAMES 2
-
 SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager)
-        : IGameObject(100), inputManager(inputManager) {
+        : IGameObject(100), inputManager(inputManager), sprite(sf::Vector2f(1, 2), 3) {
 
-    sprite0.setSize(sf::Vector2f(1, 2));
-    sprite1.setSize(sf::Vector2f(1, 2));
-    sprite0.setTexture(resourceManager.TexturePlayer0);
-    sprite1.setTexture(resourceManager.TexturePlayer1);
+    sprite.AddFrame(resourceManager.TexturePlayer0);
+    sprite.AddFrame(resourceManager.TexturePlayer1);
 
-    auto imageOutline = sprite0.getLocalBounds();
+    /*auto imageOutline = sprite.getLocalBounds();
     sprite0.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
     imageOutline = sprite1.getLocalBounds();
-    sprite1.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);
+    sprite1.setOrigin(imageOutline.left + imageOutline.width / 2, imageOutline.top + imageOutline.height / 2);*/
 }
 
 void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
@@ -40,24 +35,16 @@ void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
 void SP::Scene::Gameplay::PlayerObject::Render(sf::RenderWindow &window, float deltaRTime) {
     auto renderingPos = this->GetPosition();
     renderingPos.y *= -1;
-    sprite0.setPosition(renderingPos);
-    sprite1.setPosition(renderingPos);
+    sprite.setPosition(renderingPos);
 
     if (physicsBody->GetLinearVelocity().x > 0) {
-        sprite0.setScale(-std::abs(sprite0.getScale().x), sprite0.getScale().y);
-        sprite1.setScale(-std::abs(sprite1.getScale().x), sprite1.getScale().y);
+        sprite.setScale(-std::abs(sprite.getScale().x), sprite.getScale().y);
     } else if (physicsBody->GetLinearVelocity().x < 0) {
-        sprite0.setScale(std::abs(sprite0.getScale().x), sprite0.getScale().y);
-        sprite1.setScale(std::abs(sprite1.getScale().x), sprite1.getScale().y);
+        sprite.setScale(std::abs(sprite.getScale().x), sprite.getScale().y);
     }
 
-    timeToSwap -= deltaRTime;
-    if (timeToSwap <= 0) {
-        currentFrame = (currentFrame + 1) % ANIMATION_FRAMES;
-        timeToSwap = 1.0 / ANIMATION_FPS;
-    }
-    if (currentFrame == 0) window.draw(sprite0);
-    else if (currentFrame == 1) window.draw(sprite1);
+    sprite.UpdateRenderClock(deltaRTime);
+    window.draw(sprite);
 }
 
 void SP::Scene::Gameplay::PlayerObject::CreatePhysicsBody(b2World &physicsWorld) {

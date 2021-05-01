@@ -8,6 +8,7 @@
 #include "../../input/GameplayInputManager.h"
 #include "../resources/ResourceManager.h"
 #include "../GameplayScene.h"
+#include "../drawables/AnimatedSprite.h"
 
 namespace SP::Scene::Gameplay {
 
@@ -30,10 +31,7 @@ namespace SP::Scene::Gameplay {
         b2Body* physicsBody = nullptr;
         int footContacts = 0;
 
-        float timeToSwap = 0;
-        int currentFrame = 0;
-        sf::RectangleShape sprite0;
-        sf::RectangleShape sprite1;
+        SP::Scene::Drawable::AnimatedSprite sprite;
     };
 }
 
