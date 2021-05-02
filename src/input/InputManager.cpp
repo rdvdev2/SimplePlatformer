@@ -24,3 +24,7 @@ bool SP::Input::InputManager::IsMMB() {
 bool SP::Input::InputManager::IsRMB() {
     return IsMouseButtonPressed(sf::Mouse::Right);
 }
+
+bool SP::Input::InputManager::IsExit() {
+    return IsKeyPressed(sf::Keyboard::Escape);
+}

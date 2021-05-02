@@ -17,6 +17,8 @@ namespace SP::Input {
         bool IsMMB();
         bool IsRMB();
 
+        bool IsExit();
+
     private:
         sf::RenderWindow& window;
     };

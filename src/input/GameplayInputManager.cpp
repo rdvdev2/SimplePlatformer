@@ -12,6 +12,3 @@ bool SP::Input::GameplayInputManager::IsJump() {
     return IsKeyPressed(sf::Keyboard::Up) || IsKeyPressed(sf::Keyboard::W) || IsKeyPressed(sf::Keyboard::Space);
 }
 
-bool SP::Input::GameplayInputManager::IsPause() {
-    return IsKeyPressed(sf::Keyboard::Escape);
-}

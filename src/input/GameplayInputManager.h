@@ -12,8 +12,6 @@ public:
     bool IsLeft();
     bool IsRight();
     bool IsJump();
-
-    bool IsPause();
     };
 }
 

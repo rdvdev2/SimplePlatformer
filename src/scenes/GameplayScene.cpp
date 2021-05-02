@@ -48,7 +48,7 @@ SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::Leve
 }
 
 void SP::Scene::GameplayScene::Update(float deltaUTime) {
-    if (inputManager.IsPause()) {
+    if (inputManager.IsExit()) {
         game.Close();
     }
 

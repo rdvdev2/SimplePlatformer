@@ -7,6 +7,10 @@ SP::Scene::UIScene::UIScene(SP::Game &game) : Scene(game), inputManager(*game.wi
 
 void SP::Scene::UIScene::Update(float deltaUTime) {
     inputManager.ProcessInput();
+
+    if (inputManager.IsExit()) {
+        game.Close();
+    }
 }
 
 void SP::Scene::UIScene::Render(sf::RenderWindow &window, float deltaRTime) {
