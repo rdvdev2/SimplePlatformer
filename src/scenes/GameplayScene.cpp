@@ -71,6 +71,14 @@ void SP::Scene::GameplayScene::Update(float deltaUTime) {
             continue;
         }
 
+        auto player = dynamic_cast<SP::Scene::Gameplay::PlayerObject*>(gameObject.get());
+        if (player) {
+            auto viewPos = player->GetPosition();
+            viewPos.y *= -1;
+            view.setCenter(viewPos);
+            game.window->setView(view);
+        }
+
         gameObject->Update(deltaUTime);
     }
 }
