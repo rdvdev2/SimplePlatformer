@@ -9,6 +9,8 @@ namespace SP::Scene::Gameplay {
     class ZombieObject : public HumanoidObject {
     public:
         explicit ZombieObject(SP::Scene::Resource::ResourceManager &resourceManager);
+
+        void CreatePhysicsBody(b2World &physicsWorld) override;
     };
 }
 

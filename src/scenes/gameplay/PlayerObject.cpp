@@ -1,10 +1,12 @@
 #include "PlayerObject.h"
+#include "ZombieObject.h"
+#include "../../Game.h"
 
-SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager)
-        : HumanoidObject(100, 3), inputManager(inputManager) {
+SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Game &game)
+        : HumanoidObject(100, 3), inputManager(inputManager), game(game) {
 
-    sprite.AddFrame(resourceManager.TexturePlayer0);
-    sprite.AddFrame(resourceManager.TexturePlayer1);
+    sprite.AddFrame(game.resourceManager.TexturePlayer0);
+    sprite.AddFrame(game.resourceManager.TexturePlayer1);
 }
 
 void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
@@ -23,12 +25,14 @@ void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
     physicsBody->ApplyLinearImpulseToCenter(b2Vec2(impulse, 0), true);
 
     if (inputManager.IsJump() && footContacts > 0 && physicsBody->GetLinearVelocity().y <= 0) { // Jump key && Grounded && Not jumping yet
-        physicsBody->ApplyLinearImpulseToCenter(b2Vec2(0, physicsBody->GetMass() * 6), true);
+        physicsBody->ApplyLinearImpulseToCenter(b2Vec2(0, physicsBody->GetMass() * 10), true);
     }
 }
 
 void SP::Scene::Gameplay::PlayerObject::CreatePhysicsBody(b2World &physicsWorld) {
     HumanoidObject::CreatePhysicsBody(physicsWorld);
+
+    physicsBody->GetUserData().pointer = (uintptr_t) this;
 
     // Foot sensor fixture
     b2PolygonShape shape;
@@ -50,6 +54,21 @@ void SP::Scene::Gameplay::PlayerObject::BeginContact(b2Contact* contact) {
     if (fixtureAType == SP_FIXTURE_TYPE_FOOT && fixtureBType != SP_FIXTURE_TYPE_HUMANOID
      || fixtureAType != SP_FIXTURE_TYPE_HUMANOID && fixtureBType == SP_FIXTURE_TYPE_FOOT) {
         footContacts++;
+    }
+
+    auto objectA = contact->GetFixtureA()->GetBody()->GetUserData();
+    auto objectB = contact->GetFixtureB()->GetBody()->GetUserData();
+
+    GameObject* collidedWith;
+    if (objectA.pointer == (uintptr_t) this) {
+        collidedWith = reinterpret_cast<GameObject*>(objectB.pointer);
+    } else if (objectB.pointer == (uintptr_t) this) {
+        collidedWith = reinterpret_cast<GameObject*>(objectA.pointer);
+    } else return;
+
+    auto enemy = dynamic_cast<ZombieObject*>(collidedWith);
+    if (enemy) {
+        game.Close(); // TODO: Implement a Game Over screen
     }
 }
 

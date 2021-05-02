@@ -12,7 +12,7 @@ SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::Leve
     for (auto descriptor: levelDescription.objects) {
         switch (descriptor.type) {
             case Userdata::LevelDescription::PLAYER:
-                gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game.resourceManager));
+                gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::PlayerObject>(inputManager, game));
                 break;
             case Userdata::LevelDescription::ZOMBIE:
                 gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::ZombieObject>(game.resourceManager));

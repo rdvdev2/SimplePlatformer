@@ -11,7 +11,7 @@ namespace SP::Scene::Gameplay {
 
     class PlayerObject : public HumanoidObject, public b2ContactListener {
     public:
-        PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Scene::Resource::ResourceManager &resourceManager);
+        PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Game &game);
 
         void Update(float deltaUTime) override;
 
@@ -22,6 +22,7 @@ namespace SP::Scene::Gameplay {
 
     private:
         SP::Input::GameplayInputManager &inputManager;
+        SP::Game &game;
 
         int footContacts = 0;
     };

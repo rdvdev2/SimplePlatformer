@@ -22,6 +22,8 @@ void SP::Scene::Gameplay::FlatPlatformObject::CreatePhysicsBody(b2World &physics
     bodyDef.position.Set(position.x, position.y);
     physicsBody = physicsWorld.CreateBody(&bodyDef);
 
+    physicsBody->GetUserData().pointer = (uintptr_t) this;
+
     b2PolygonShape shape;
     shape.SetAsBox(4.5, 0.5);
     b2FixtureDef fixtureDef;

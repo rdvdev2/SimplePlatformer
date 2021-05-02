@@ -6,3 +6,9 @@ SP::Scene::Gameplay::ZombieObject::ZombieObject(SP::Scene::Resource::ResourceMan
     sprite.AddFrame(resourceManager.TextureZombie0);
     sprite.AddFrame(resourceManager.TextureZombie1);
 }
+
+void SP::Scene::Gameplay::ZombieObject::CreatePhysicsBody(b2World &physicsWorld) {
+    HumanoidObject::CreatePhysicsBody(physicsWorld);
+
+    physicsBody->GetUserData().pointer = (uintptr_t) this;
+}
