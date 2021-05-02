@@ -1,13 +1,13 @@
-#ifndef SIMPLEPLATFORMER_IGAMEOBJECT_H
-#define SIMPLEPLATFORMER_IGAMEOBJECT_H
+#ifndef SIMPLEPLATFORMER_GAMEOBJECT_H
+#define SIMPLEPLATFORMER_GAMEOBJECT_H
 
 #include <SFML/Graphics.hpp>
 
 namespace SP::Scene::Gameplay {
 
-    class IGameObject {
+    class GameObject {
     public:
-        explicit IGameObject(int renderDepth);;
+        explicit GameObject(int renderDepth);;
 
         void SetPosition(sf::Vector2f pos);
         sf::Vector2f GetPosition();
@@ -23,4 +23,4 @@ namespace SP::Scene::Gameplay {
     };
 }
 
-#endif //SIMPLEPLATFORMER_IGAMEOBJECT_H
+#endif //SIMPLEPLATFORMER_GAMEOBJECT_H

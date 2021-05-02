@@ -1,14 +1,14 @@
 #ifndef SIMPLEPLATFORMER_HUMANOIDOBJECT_H
 #define SIMPLEPLATFORMER_HUMANOIDOBJECT_H
 
-#include "IGameObject.h"
+#include "GameObject.h"
 #include "IPhysicsObject.h"
 #include "../GameplayScene.h"
 #include "../drawables/AnimatedSprite.h"
 
 namespace SP::Scene::Gameplay {
 
-    class HumanoidObject : public IGameObject, public IPhysicsObject {
+    class HumanoidObject : public GameObject, public IPhysicsObject {
     public:
         explicit HumanoidObject(int renderDepth, float animationFps);
 

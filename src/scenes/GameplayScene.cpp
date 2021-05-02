@@ -45,7 +45,7 @@ void SP::Scene::GameplayScene::Update(float deltaUTime) {
     physicsWorld.Step(deltaUTime, 6, 2);
 
     gameObjects.sort(
-            [](const std::unique_ptr<SP::Scene::Gameplay::IGameObject>& a, const std::unique_ptr<SP::Scene::Gameplay::IGameObject>& b)
+            [](const std::unique_ptr<SP::Scene::Gameplay::GameObject>& a, const std::unique_ptr<SP::Scene::Gameplay::GameObject>& b)
             { return a->GetRenderDepth() < b->GetRenderDepth(); });
 
     for (auto&& gameObject: gameObjects) {

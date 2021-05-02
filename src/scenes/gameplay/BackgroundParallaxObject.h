@@ -1,12 +1,12 @@
 #ifndef SIMPLEPLATFORMER_BACKGROUNDPARALLAXOBJECT_H
 #define SIMPLEPLATFORMER_BACKGROUNDPARALLAXOBJECT_H
 
-#include "IGameObject.h"
+#include "GameObject.h"
 #include "../resources/ResourceManager.h"
 
 namespace SP::Scene::Gameplay {
 
-    class BackgroundParallaxObject : public IGameObject {
+    class BackgroundParallaxObject : public GameObject {
     public:
         explicit BackgroundParallaxObject(SP::Scene::Resource::ResourceManager &resourceManager);
 

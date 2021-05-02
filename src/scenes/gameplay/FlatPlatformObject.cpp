@@ -1,6 +1,6 @@
 #include "FlatPlatformObject.h"
 
-SP::Scene::Gameplay::FlatPlatformObject::FlatPlatformObject(SP::Scene::Resource::ResourceManager &resourceManager) : IGameObject(0) {
+SP::Scene::Gameplay::FlatPlatformObject::FlatPlatformObject(SP::Scene::Resource::ResourceManager &resourceManager) : GameObject(0) {
 
     sprite.setSize(sf::Vector2f(9, 1));
     sprite.setTexture(resourceManager.TextureGround);

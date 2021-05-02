@@ -1,6 +1,6 @@
 #include "HumanoidObject.h"
 
-SP::Scene::Gameplay::HumanoidObject::HumanoidObject(int renderDepth, float animationFps): IGameObject(renderDepth), sprite(sf::Vector2f(1, 2), animationFps) {
+SP::Scene::Gameplay::HumanoidObject::HumanoidObject(int renderDepth, float animationFps): GameObject(renderDepth), sprite(sf::Vector2f(1, 2), animationFps) {
 
 }
 

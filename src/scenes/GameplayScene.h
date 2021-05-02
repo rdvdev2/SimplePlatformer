@@ -5,7 +5,7 @@
 #include <box2d/box2d.h>
 
 #include "Scene.h"
-#include "gameplay/IGameObject.h"
+#include "gameplay/GameObject.h"
 #include "../input/GameplayInputManager.h"
 #include "../userdata/LevelDescription.h"
 
@@ -23,7 +23,7 @@ namespace SP::Scene {
         sf::View sceneView = sf::View(sf::Vector2f(), sf::Vector2f(30, 20));
 
     private:
-        std::list<std::unique_ptr<SP::Scene::Gameplay::IGameObject>> gameObjects;
+        std::list<std::unique_ptr<SP::Scene::Gameplay::GameObject>> gameObjects;
         b2World physicsWorld;
 
         SP::Input::GameplayInputManager inputManager;
