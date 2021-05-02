@@ -6,8 +6,6 @@
 #include "gameplay/ZombieObject.h"
 
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::LevelDescription& levelDescription) : Scene(game), inputManager(*game.window), physicsWorld(b2Vec2(0.0f, -9.8f)) {
-    game.window->setView(sceneView);
-
     // Objects from the level description
     for (auto descriptor: levelDescription.objects) {
         switch (descriptor.type) {
@@ -63,22 +61,4 @@ void SP::Scene::GameplayScene::Render(sf::RenderWindow &window, float deltaRTime
     for (auto&& gameObject: gameObjects) {
         gameObject->Render(window, deltaRTime);
     }
-}
-
-void SP::Scene::GameplayScene::AdjustToWindowSize(sf::Vector2u windowSize) {
-    sf::FloatRect viewport(0, 0, 1, 1);
-
-    float screenWidth = windowSize.x / sceneView.getSize().x;
-    float screenHeight = windowSize.y / sceneView.getSize().y;
-
-    if (screenWidth > screenHeight) {
-        viewport.width = screenHeight / screenWidth;
-        viewport.left = (1 - viewport.width) / 2;
-    } else if (screenWidth < screenHeight) {
-        viewport.height = screenWidth / screenHeight;
-        viewport.top = (1 - viewport.height) / 2;
-    }
-
-    sceneView.setViewport(viewport);
-    game.window->setView(sceneView);
 }

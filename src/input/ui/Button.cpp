@@ -1,6 +1,6 @@
 #include "Button.h"
 
-void SP::Input::Menu::Button::ProcessInput(SP::Input::InputManager& inputManager) {
+void SP::Input::UI::Button::ProcessInput(SP::Input::InputManager& inputManager) {
     if (clicked) {
         if (!inputManager.IsLMB()) clicked = false;
     } else {
@@ -9,8 +9,4 @@ void SP::Input::Menu::Button::ProcessInput(SP::Input::InputManager& inputManager
             callback(callbackData);
         }
     }
-}
-
-void SP::Input::Menu::Button::UpdateArea(sf::IntRect newArea) {
-    area = newArea;
 }

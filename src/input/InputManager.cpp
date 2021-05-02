@@ -8,8 +8,8 @@ bool SP::Input::InputManager::IsMouseButtonPressed(sf::Mouse::Button button) {
     return window.hasFocus() && sf::Mouse::isButtonPressed(button);
 }
 
-sf::Vector2i SP::Input::InputManager::GetMousePosition() {
-    return sf::Mouse::getPosition(window);
+sf::Vector2f SP::Input::InputManager::GetMousePosition() {
+    return window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
 

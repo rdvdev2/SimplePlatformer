@@ -1,24 +1,24 @@
 #ifndef SIMPLEPLATFORMER_INPUTMANAGER_H
 #define SIMPLEPLATFORMER_INPUTMANAGER_H
 
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace SP::Input {
 
     class InputManager {
     public:
-        explicit InputManager(sf::Window& window) : window(window) {};
+        explicit InputManager(sf::RenderWindow& window) : window(window) {};
 
         bool IsKeyPressed(sf::Keyboard::Key key);
         bool IsMouseButtonPressed(sf::Mouse::Button button);
-        sf::Vector2i GetMousePosition();
+        sf::Vector2f GetMousePosition();
 
         bool IsLMB();
         bool IsMMB();
         bool IsRMB();
 
     private:
-        sf::Window& window;
+        sf::RenderWindow& window;
     };
 }
 

@@ -4,19 +4,18 @@
 #include <SFML/Graphics.hpp>
 #include "../InputManager.h"
 
-namespace SP::Input::Menu {
+namespace SP::Input::UI {
 
     typedef void (*ButtonCallback)(void* data);
 
     class Button {
     public:
-        Button(sf::IntRect area, ButtonCallback callback, void* callbackData) : area(area), callback(callback), callbackData(callbackData) {}
+        Button(sf::FloatRect area, ButtonCallback callback, void* callbackData) : area(area), callback(callback), callbackData(callbackData) {}
 
         void ProcessInput(InputManager& inputManager);
-        void UpdateArea(sf::IntRect newArea);
 
     private:
-        sf::IntRect area;
+        sf::FloatRect area;
         ButtonCallback callback;
         void* callbackData;
         bool clicked = false;

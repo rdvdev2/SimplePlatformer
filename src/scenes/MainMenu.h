@@ -1,30 +1,16 @@
 #ifndef SIMPLEPLATFORMER_MAINMENU_H
 #define SIMPLEPLATFORMER_MAINMENU_H
 
-#include "Scene.h"
+#include "UIScene.h"
 #include "resources/ResourceManager.h"
-#include "../input/menu/MenuInputManager.h"
 
 namespace SP::Scene {
 
-    class MainMenu: public Scene {
+    class MainMenu: public UIScene {
     public:
         explicit MainMenu(Game& game);
 
         void Update(float deltaUTime) override;
-        void Render(sf::RenderWindow &window, float deltaRTime) override;
-
-        void AdjustToWindowSize(sf::Vector2u windowSize) override;
-
-    private:
-
-        SP::Input::Menu::MenuInputManager inputManager;
-        SP::Input::Menu::Button* playButton;
-
-        sf::Sprite backgroundSprite;
-        sf::Sprite playButtonSprite;
-        sf::Text titleText;
-        sf::Text authorsText;
     };
 }
 
