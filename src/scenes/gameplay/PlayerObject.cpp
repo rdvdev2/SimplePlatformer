@@ -13,6 +13,11 @@ SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager 
 
 void SP::Scene::Gameplay::PlayerObject::Update(float deltaUTime) {
 
+    if (GetPosition().y < -10) {
+        Lose();
+        return;
+    }
+
     // Horizontal movement
     auto horizontalVelocity = physicsBody->GetLinearVelocity().x;
     float desiredVelocity = 0;
