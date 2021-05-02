@@ -25,7 +25,9 @@ bool SP::Userdata::LevelDescription::LoadFromFile(std::string &filename) {
             ObjectType type;
             if (std::string(typeStr) == "PLAYER") type = PLAYER;
             else if (std::string(typeStr) == "ZOMBIE") type = ZOMBIE;
+            else if (std::string(typeStr) == "GOOMBA") type = GOOMBA;
             else if (std::string(typeStr) == "FLAT_PLATFORM") type = FLAT_PLATFORM;
+            else continue; // Type not recognized
 
             this->objects.emplace_back(type, x, y);
         }

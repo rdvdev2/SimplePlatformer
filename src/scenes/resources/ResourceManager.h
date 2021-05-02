@@ -20,13 +20,9 @@ namespace SP::Scene::Resource {
             TextureGoomba0.Load();
             TextureGoomba1.Load();
             TexturePlayer0.Load();
-            TexturePlayer0.Get().setSmooth(false);
             TexturePlayer1.Load();
-            TexturePlayer1.Get().setSmooth(false);
             TextureZombie0.Load();
-            TextureZombie0.Get().setSmooth(false);
             TextureZombie1.Load();
-            TextureZombie1.Get().setSmooth(false);
 
             TextureMainMenuBackground.Load();
             TextureMainMenuPlayButton.Load();
@@ -35,9 +31,7 @@ namespace SP::Scene::Resource {
             TextureGameBackgroundLayer1.Load();
             TextureGameBackgroundLayer2.Load();
             TextureGround.Load();
-            TextureGround.Get().setSmooth(false);
             TextureGroundSlope.Load();
-            TextureGroundSlope.Get().setSmooth(false);
             TextureLightning.Load();
             TextureTree.Load();
 

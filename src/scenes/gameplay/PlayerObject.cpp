@@ -66,7 +66,7 @@ void SP::Scene::Gameplay::PlayerObject::BeginContact(b2Contact* contact) {
         collidedWith = reinterpret_cast<GameObject*>(objectA.pointer);
     } else return;
 
-    auto enemy = dynamic_cast<ZombieObject*>(collidedWith);
+    auto enemy = dynamic_cast<EnemyObject*>(collidedWith);
     if (enemy) {
         game.Close(); // TODO: Implement a Game Over screen
     }

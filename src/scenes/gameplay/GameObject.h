@@ -3,9 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../../util/IUpdateable.h"
+
 namespace SP::Scene::Gameplay {
 
-    class GameObject {
+    class GameObject : public SP::Util::IUpdateable {
     public:
         explicit GameObject(int renderDepth);;
 
@@ -14,7 +16,7 @@ namespace SP::Scene::Gameplay {
 
         int GetRenderDepth() const;
 
-        virtual void Update(float deltaUTime);
+        void Update(float deltaUTime) override;
         virtual void Render(sf::RenderWindow &window, float deltaRTime);
 
     protected:

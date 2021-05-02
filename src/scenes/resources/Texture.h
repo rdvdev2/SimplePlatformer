@@ -15,7 +15,7 @@ namespace SP::Scene::Resource {
             if (!resource.loadFromFile(filename)) {
                 throw std::runtime_error("Error loading texture @ " + filename + "!");
             }
-            resource.setSmooth(true);
+            resource.setSmooth(false);
         };
     };
 }

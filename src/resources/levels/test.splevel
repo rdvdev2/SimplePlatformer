@@ -1,6 +1,7 @@
 # Entities
 PLAYER         0 3
 ZOMBIE        -4 3
+GOOMBA         4 3
 
 # Platforms
 FLAT_PLATFORM -9 0

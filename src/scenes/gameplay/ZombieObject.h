@@ -3,10 +3,11 @@
 
 #include "HumanoidObject.h"
 #include "../resources/ResourceManager.h"
+#include "EnemyObject.h"
 
 namespace SP::Scene::Gameplay {
 
-    class ZombieObject : public HumanoidObject {
+    class ZombieObject : public HumanoidObject, public EnemyObject {
     public:
         explicit ZombieObject(SP::Scene::Resource::ResourceManager &resourceManager);
 

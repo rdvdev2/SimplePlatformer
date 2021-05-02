@@ -6,6 +6,7 @@
 #define SP_FIXTURE_TYPE_GROUND 1
 #define SP_FIXTURE_TYPE_HUMANOID 2
 #define SP_FIXTURE_TYPE_FOOT 3
+#define SP_FIXTURE_TYPE_GOOMBA 4
 
 namespace SP::Scene::Gameplay {
 
