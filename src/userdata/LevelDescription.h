@@ -8,7 +8,7 @@ namespace SP::Userdata {
     class LevelDescription {
     public:
         enum ObjectType {
-            PLAYER, FLAT_PLATFORM
+            PLAYER, ZOMBIE, FLAT_PLATFORM
         };
 
         class ObjectDescriptor {

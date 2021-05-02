@@ -22,7 +22,9 @@ namespace SP::Scene::Resource {
             TexturePlayer1.Load();
             TexturePlayer1.Get().setSmooth(false);
             TextureZombie0.Load();
+            TextureZombie0.Get().setSmooth(false);
             TextureZombie1.Load();
+            TextureZombie1.Get().setSmooth(false);
 
             TextureMainMenuBackground.Load();
             TextureMainMenuPlayButton.Load();

@@ -4,7 +4,7 @@
 #include <box2d/box2d.h>
 
 #define SP_FIXTURE_TYPE_GROUND 1
-#define SP_FIXTURE_TYPE_PLAYER 2
+#define SP_FIXTURE_TYPE_HUMANOID 2
 #define SP_FIXTURE_TYPE_FOOT 3
 
 namespace SP::Scene::Gameplay {
