@@ -55,6 +55,7 @@ namespace SP::Scene::Resource {
         TEXTURE(GameBackgroundLayer2, scenery/background_layer_2);
         TEXTURE(Ground, scenery/ground);
         TEXTURE(GroundSlope, scenery/ground_slope);
+        TEXTURE(LightBulb, scenery/light_bulb);
         TEXTURE(Lightning, scenery/lightning);
         TEXTURE(Tree, scenery/tree);
 
