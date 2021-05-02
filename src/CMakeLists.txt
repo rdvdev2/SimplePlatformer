@@ -5,6 +5,8 @@ file(GLOB_RECURSE SOURCE_FILES *.c *.cpp *.h *.hpp)
 # Configure the platform header
 if(RUN_ON_BUILD_TREE)
     set(RESOURCES_PATH \"${CMAKE_CURRENT_BINARY_DIR}/resources\")
+elseif(PORTABLE)
+    set(RESOURCES_PATH \"./resources\")
 else()
     set(RESOURCES_PATH \"${CMAKE_INSTALL_FULL_DATAROOTDIR}/resources\")
 endif()
@@ -17,6 +19,8 @@ target_compile_features(SimplePlatformer PUBLIC cxx_std_20) # Compile with C++20
 target_link_libraries(SimplePlatformer PRIVATE sfml-graphics sfml-window sfml-system) # Compile against SFML
 target_link_libraries(SimplePlatformer PRIVATE box2d) # Compile against Box2D
 target_link_libraries(SimplePlatformer PRIVATE pulzed::mINI) # Include mINI header
+set(CMAKE_EXE_LINKER_FLAGS " -static")
+target_link_libraries(SimplePlatformer PRIVATE -static-libgcc -static-libstdc++) # Include C++ libs
 
 # Installation steps
 install(TARGETS SimplePlatformer RUNTIME)
