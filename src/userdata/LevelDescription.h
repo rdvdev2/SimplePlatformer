@@ -2,6 +2,7 @@
 #define SIMPLEPLATFORMER_LEVELDESCRIPTION_H
 
 #include <vector>
+#include <string>
 
 namespace SP::Userdata {
 
@@ -16,13 +17,13 @@ namespace SP::Userdata {
             ObjectDescriptor(ObjectType type, float x, float  y);
 
             ObjectType type;
-            float x{};
-            float y{};
+            float x;
+            float y;
         };
 
         std::vector<ObjectDescriptor> objects;
 
-        static LevelDescription GetTestLevel();
+        bool LoadFromFile(std::string& filename);
     };
 }
 

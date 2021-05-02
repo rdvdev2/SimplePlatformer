@@ -1,20 +1,36 @@
 #include "LevelDescription.h"
 
+#include <istream>
+#include <fstream>
+
 SP::Userdata::LevelDescription::ObjectDescriptor::ObjectDescriptor(SP::Userdata::LevelDescription::ObjectType type,
                                                                    float x, float y): type(type), x(x), y(y) {
 
 }
 
-SP::Userdata::LevelDescription SP::Userdata::LevelDescription::GetTestLevel() { // TODO: Remove when level parsing is implemented
-    LevelDescription level;
+bool SP::Userdata::LevelDescription::LoadFromFile(std::string &filename) {
+    std::ifstream file(filename);
+    std::string line;
 
-    level.objects.emplace_back(PLAYER, 0, 3);
+    if (!file.is_open()) return false;
 
-    level.objects.emplace_back(ZOMBIE, -4, 3);
+    this->objects.clear();
+    while (getline(file, line)) {
+        if (line.starts_with('#')) continue; // Ignore comments, starting with '#'
+        char typeStr[100];
+        float x;
+        float y;
 
-    level.objects.emplace_back(FLAT_PLATFORM, -9, 0);
-    level.objects.emplace_back(FLAT_PLATFORM, 0, 0);
-    level.objects.emplace_back(FLAT_PLATFORM, 9, 0);
+        if (3 == sscanf(line.c_str(), "%99s %f %f", typeStr, &x, &y)) {
+            ObjectType type;
+            if (std::string(typeStr) == "PLAYER") type = PLAYER;
+            else if (std::string(typeStr) == "ZOMBIE") type = ZOMBIE;
+            else if (std::string(typeStr) == "FLAT_PLATFORM") type = FLAT_PLATFORM;
 
-    return level;
+            this->objects.emplace_back(type, x, y);
+        }
+    }
+
+    file.close();
+    return true;
 }

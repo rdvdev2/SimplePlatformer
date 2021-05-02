@@ -68,5 +68,5 @@ void SP::Scene::MainMenu::Render(sf::RenderWindow &window, float deltaRTime) {
 
 void playButtonCallback(void* data) {
     auto game = (SP::Game*) data;
-    game->SetNextUpdateScene(std::make_unique<SP::Scene::GameplayScene>(*game));
+    game->SetNextUpdateScene(std::make_unique<SP::Scene::GameplayScene>(*game, game->resourceManager.LevelTest));
 }

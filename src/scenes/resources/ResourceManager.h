@@ -3,10 +3,12 @@
 
 #include "Font.h"
 #include "Texture.h"
+#include "Level.h"
 #include <platform.h>
 
 #define FONT(name, file) Font Font##name = Font(SP::Platform::GetResourcePath("fonts/"#file".ttf"))
 #define TEXTURE(name, file) Texture Texture##name = Texture(SP::Platform::GetResourcePath("textures/"#file".png"))
+#define LEVEL(name, file) Level Level##name = Level(SP::Platform::GetResourcePath("levels/"#file".splevel"))
 
 namespace SP::Scene::Resource {
 
@@ -38,6 +40,8 @@ namespace SP::Scene::Resource {
             TextureGroundSlope.Get().setSmooth(false);
             TextureLightning.Load();
             TextureTree.Load();
+
+            LevelTest.Load();
         }
 
         FONT(Moonhouse, moonhouse);
@@ -59,6 +63,8 @@ namespace SP::Scene::Resource {
         TEXTURE(GroundSlope, scenery/ground_slope);
         TEXTURE(Lightning, scenery/lightning);
         TEXTURE(Tree, scenery/tree);
+
+        LEVEL(Test, test);
     };
 }
 
