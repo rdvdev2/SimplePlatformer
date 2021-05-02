@@ -9,12 +9,12 @@ namespace SP::Userdata {
     class LevelDescription {
     public:
         enum ObjectType {
-            PLAYER, ZOMBIE, GOOMBA, FLAT_PLATFORM
+            PLAYER, ZOMBIE, GOOMBA, FLAT_PLATFORM, LIGHT_BULB
         };
 
         class ObjectDescriptor {
         public:
-            ObjectDescriptor(ObjectType type, float x, float  y);
+            ObjectDescriptor(ObjectType type, float x, float y);
 
             ObjectType type;
             float x;

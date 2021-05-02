@@ -1,6 +1,7 @@
 #include "PlayerObject.h"
 #include "ZombieObject.h"
 #include "../../Game.h"
+#include "CollectibleObject.h"
 
 SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Game &game)
         : HumanoidObject(100, 3), inputManager(inputManager), game(game) {
@@ -70,6 +71,11 @@ void SP::Scene::Gameplay::PlayerObject::BeginContact(b2Contact* contact) {
     if (enemy) {
         game.Close(); // TODO: Implement a Game Over screen
     }
+
+    auto collectible = dynamic_cast<CollectibleObject*>(collidedWith);
+    if (collectible) {
+        collectible->OnCollect(this);
+    }
 }
 
 void SP::Scene::Gameplay::PlayerObject::EndContact(b2Contact* contact) {
@@ -80,4 +86,8 @@ void SP::Scene::Gameplay::PlayerObject::EndContact(b2Contact* contact) {
      || fixtureAType != SP_FIXTURE_TYPE_HUMANOID && fixtureBType == SP_FIXTURE_TYPE_FOOT) {
         footContacts--;
     }
+}
+
+void SP::Scene::Gameplay::PlayerObject::Win() {
+    game.Close(); // TODO: Implement a Game Win screen
 }

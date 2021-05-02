@@ -1,9 +1,12 @@
 # Entities
-PLAYER         0 3
-ZOMBIE        -4 3
-GOOMBA         4 3
+PLAYER         0   3
+ZOMBIE        -4   3
+GOOMBA         4   3
 
 # Platforms
-FLAT_PLATFORM -9 0
-FLAT_PLATFORM  0 0
-FLAT_PLATFORM  9 0
+FLAT_PLATFORM -9   0
+FLAT_PLATFORM  0   0
+FLAT_PLATFORM  9   0
+
+# Collectibles
+LIGHT_BULB     9   6

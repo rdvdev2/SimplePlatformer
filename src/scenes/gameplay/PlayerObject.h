@@ -20,6 +20,8 @@ namespace SP::Scene::Gameplay {
         void BeginContact(b2Contact* contact) override;
         void EndContact(b2Contact* contact) override;
 
+        void Win();
+
     private:
         SP::Input::GameplayInputManager &inputManager;
         SP::Game &game;

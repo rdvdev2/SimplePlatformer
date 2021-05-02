@@ -5,6 +5,7 @@
 #include "gameplay/BackgroundParallaxObject.h"
 #include "gameplay/ZombieObject.h"
 #include "gameplay/GoombaObject.h"
+#include "gameplay/LightBulbObject.h"
 
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::LevelDescription& levelDescription) : Scene(game), inputManager(*game.window), physicsWorld(b2Vec2(0.0f, -9.8f)) {
     // Objects from the level description
@@ -21,6 +22,9 @@ SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::Leve
                 break;
             case Userdata::LevelDescription::FLAT_PLATFORM:
                 gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::FlatPlatformObject>(game.resourceManager));
+                break;
+            case Userdata::LevelDescription::LIGHT_BULB:
+                gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::LightBulbObject>(game.resourceManager));
                 break;
             default:
                 continue; // Shouldn't happen, but we never know
