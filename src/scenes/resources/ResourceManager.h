@@ -36,6 +36,7 @@ namespace SP::Scene::Resource {
             TextureGameBackgroundLayer2.Load();
             TextureGround.Load();
             TextureGroundSlope.Load();
+            TextureLightBulb.Load();
             TextureLightning.Load();
             TextureTree.Load();
 
