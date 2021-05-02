@@ -2,6 +2,7 @@
 #include "ZombieObject.h"
 #include "../../Game.h"
 #include "CollectibleObject.h"
+#include "../GameEndScene.h"
 
 SP::Scene::Gameplay::PlayerObject::PlayerObject(SP::Input::GameplayInputManager &inputManager, SP::Game &game)
         : HumanoidObject(100, 3), inputManager(inputManager), game(game) {
@@ -69,7 +70,7 @@ void SP::Scene::Gameplay::PlayerObject::BeginContact(b2Contact* contact) {
 
     auto enemy = dynamic_cast<EnemyObject*>(collidedWith);
     if (enemy) {
-        game.Close(); // TODO: Implement a Game Over screen
+        this->Lose();
     }
 
     auto collectible = dynamic_cast<CollectibleObject*>(collidedWith);
@@ -89,5 +90,9 @@ void SP::Scene::Gameplay::PlayerObject::EndContact(b2Contact* contact) {
 }
 
 void SP::Scene::Gameplay::PlayerObject::Win() {
-    game.Close(); // TODO: Implement a Game Win screen
+    game.SetNextUpdateScene(std::make_unique<GameEndScene>(game, true));
+}
+
+void SP::Scene::Gameplay::PlayerObject::Lose() {
+    game.SetNextUpdateScene(std::make_unique<GameEndScene>(game, false));
 }

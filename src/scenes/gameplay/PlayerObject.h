@@ -21,6 +21,7 @@ namespace SP::Scene::Gameplay {
         void EndContact(b2Contact* contact) override;
 
         void Win();
+        void Lose();
 
     private:
         SP::Input::GameplayInputManager &inputManager;

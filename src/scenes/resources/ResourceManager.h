@@ -26,6 +26,10 @@ namespace SP::Scene::Resource {
 
             TextureMainMenuBackground.Load();
             TextureMainMenuPlayButton.Load();
+            TextureMainMenuPlayButton.Get().setSmooth(true);
+
+            TextureEndGameReplayButton.Load();
+            TextureEndGameReplayButton.Get().setSmooth(true);
 
             TextureGameBackgroundLayer0.Load();
             TextureGameBackgroundLayer1.Load();
@@ -49,6 +53,8 @@ namespace SP::Scene::Resource {
 
         TEXTURE(MainMenuBackground, main_menu/background);
         TEXTURE(MainMenuPlayButton, main_menu/play_button);
+
+        TEXTURE(EndGameReplayButton, end_game/replay_button);
 
         TEXTURE(GameBackgroundLayer0, scenery/background_layer_0);
         TEXTURE(GameBackgroundLayer1, scenery/background_layer_1);
