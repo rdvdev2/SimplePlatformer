@@ -90,9 +90,9 @@ void SP::Scene::Gameplay::PlayerObject::EndContact(b2Contact* contact) {
 }
 
 void SP::Scene::Gameplay::PlayerObject::Win() {
-    game.SetNextUpdateScene(std::make_unique<GameEndScene>(game, true));
+    game.SetNextUpdateScene(std::make_unique<GameEndScene>(game, true, score));
 }
 
 void SP::Scene::Gameplay::PlayerObject::Lose() {
-    game.SetNextUpdateScene(std::make_unique<GameEndScene>(game, false));
+    game.SetNextUpdateScene(std::make_unique<GameEndScene>(game, false, score));
 }

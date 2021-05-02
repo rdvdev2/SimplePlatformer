@@ -7,7 +7,7 @@ namespace SP::Scene {
 
     class GameEndScene : public UIScene {
     public:
-        GameEndScene(Game& game, bool won);
+        GameEndScene(Game& game, bool won, int score);
 
         void Update(float deltaUTime) override;
     };

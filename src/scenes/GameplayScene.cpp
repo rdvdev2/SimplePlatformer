@@ -6,6 +6,7 @@
 #include "gameplay/ZombieObject.h"
 #include "gameplay/GoombaObject.h"
 #include "gameplay/LightBulbObject.h"
+#include "gameplay/LightningObject.h"
 
 SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::LevelDescription& levelDescription) : Scene(game), inputManager(*game.window), physicsWorld(b2Vec2(0.0f, -9.8f)) {
     // Objects from the level description
@@ -25,6 +26,9 @@ SP::Scene::GameplayScene::GameplayScene(SP::Game &game, const SP::Userdata::Leve
                 break;
             case Userdata::LevelDescription::LIGHT_BULB:
                 gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::LightBulbObject>(game.resourceManager));
+                break;
+            case Userdata::LevelDescription::LIGHTNING:
+                gameObjects.push_back(std::make_unique<SP::Scene::Gameplay::LightningObject>(*this));
                 break;
             default:
                 continue; // Shouldn't happen, but we never know
@@ -54,11 +58,17 @@ void SP::Scene::GameplayScene::Update(float deltaUTime) {
             [](const std::unique_ptr<SP::Scene::Gameplay::GameObject>& a, const std::unique_ptr<SP::Scene::Gameplay::GameObject>& b)
             { return a->GetRenderDepth() < b->GetRenderDepth(); });
 
-    for (auto&& gameObject: gameObjects) {
+    for (auto& gameObject: gameObjects) {
         auto physicsObject = dynamic_cast<SP::Scene::Gameplay::IPhysicsObject*>(gameObject.get());
         if (physicsObject) {
+            if (gameObject->markedForDeletion) physicsWorld.DestroyBody(physicsObject->GetPhysicsBody());
             auto newPos = physicsObject->GetPhysicsBody()->GetPosition();
             gameObject->SetPosition(sf::Vector2f(newPos.x, newPos.y));
+        }
+
+        if (gameObject->markedForDeletion) {
+            gameObjects.remove(gameObject);
+            continue;
         }
 
         gameObject->Update(deltaUTime);

@@ -4,7 +4,7 @@
 
 void replayButtonCallback(void* data);
 
-SP::Scene::GameEndScene::GameEndScene(SP::Game &game, bool won) : UIScene(game) {
+SP::Scene::GameEndScene::GameEndScene(SP::Game &game, bool won, int score) : UIScene(game) {
     auto viewSize = view.getSize();
     sf::FloatRect outline;
     float scaleFactor;
@@ -33,7 +33,20 @@ SP::Scene::GameEndScene::GameEndScene(SP::Game &game, bool won) : UIScene(game) 
     resultText.setPosition(view.getCenter().x, view.getCenter().y - viewSize.y / 10 * 2);
     AddText(resultText);
 
-    // TODO: Score
+    // Score text
+    sf::Text scoreText;
+    scoreText.setFont(game.resourceManager.FontMoonhouse);
+    scoreText.setString("Score: " + std::to_string(score));
+    scoreText.setFillColor(sf::Color(255, 255, 255));
+    scoreText.setStyle(sf::Text::Regular);
+
+    scoreText.setCharacterSize(sf::VideoMode::getDesktopMode().height / 15);
+    outline = scoreText.getLocalBounds();
+    scoreText.setOrigin(outline.left + outline.width / 2, outline.top + outline.height / 2);
+    scaleFactor = viewSize.y / outline.height / 25;
+    scoreText.setScale(scaleFactor, scaleFactor);
+    scoreText.setPosition(view.getCenter().x, view.getCenter().y - viewSize.y / 10);
+    AddText(scoreText);
 
     // Replay button
     sf::RectangleShape replayButtonSprite;

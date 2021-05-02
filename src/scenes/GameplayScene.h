@@ -18,10 +18,10 @@ namespace SP::Scene {
         void Update(float deltaUTime) override;
         void Render(sf::RenderWindow &window, float deltaRTime) override;
 
-    private:
         std::list<std::unique_ptr<SP::Scene::Gameplay::GameObject>> gameObjects;
         b2World physicsWorld;
 
+    private:
         SP::Input::GameplayInputManager inputManager;
     };
 }

@@ -23,6 +23,8 @@ namespace SP::Scene::Gameplay {
         void Win();
         void Lose();
 
+        int score;
+
     private:
         SP::Input::GameplayInputManager &inputManager;
         SP::Game &game;

@@ -19,6 +19,8 @@ namespace SP::Scene::Gameplay {
         void Update(float deltaUTime) override;
         virtual void Render(sf::RenderWindow &window, float deltaRTime);
 
+        bool markedForDeletion = false;
+
     protected:
         sf::Vector2f position;
         int renderDepth;

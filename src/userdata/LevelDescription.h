@@ -9,7 +9,7 @@ namespace SP::Userdata {
     class LevelDescription {
     public:
         enum ObjectType {
-            PLAYER, ZOMBIE, GOOMBA, FLAT_PLATFORM, LIGHT_BULB
+            PLAYER, ZOMBIE, GOOMBA, FLAT_PLATFORM, LIGHT_BULB, LIGHTNING
         };
 
         class ObjectDescriptor {
